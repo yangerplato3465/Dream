@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMirrorMovement : MonoBehaviour {
     public float moveSpeed;
     public Rigidbody2D body;
     private Vector2 moveInput;
@@ -16,14 +16,5 @@ public class PlayerMovement : MonoBehaviour {
         moveInput.Normalize();
 
         body.velocity = moveInput * moveSpeed;
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) {
-        switch (other.transform.tag)
-        {
-            case "Player":
-                EventManager.TriggerEvent(GameEvents.GAME_WIN);
-                break;
-        }
     }
 }
