@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     public float moveSpeed;
+    public Animator animator;
     public Rigidbody2D body;
     private Vector2 moveInput;
     void Start() {
@@ -12,6 +13,8 @@ public class PlayerMovement : MonoBehaviour {
     void Update() {
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Speed", Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y));
 
         moveInput.Normalize();
 
@@ -22,7 +25,7 @@ public class PlayerMovement : MonoBehaviour {
         switch (other.transform.tag)
         {
             case "Player":
-                EventManager.TriggerEvent(GameEvents.GAME_WIN);
+                EventManager.TriggerEvent(SystemEvents.GAME_WIN);
                 break;
         }
     }

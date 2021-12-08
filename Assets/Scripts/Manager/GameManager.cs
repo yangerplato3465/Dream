@@ -32,10 +32,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void AddListener() {
-        EventManager.AddListener(GameEvents.GAME_WIN, onGameWin);
+        EventManager.AddListener(SystemEvents.GAME_WIN, onGameWin);
     }
 
     private void OnDestroy() {
-        EventManager.RemoveListener(GameEvents.GAME_WIN, onGameWin);
+        EventManager.RemoveListener(SystemEvents.GAME_WIN, onGameWin);
     }
 }
