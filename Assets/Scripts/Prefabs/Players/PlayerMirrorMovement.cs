@@ -20,4 +20,13 @@ public class PlayerMirrorMovement : MonoBehaviour {
 
         body.velocity = moveInput * moveSpeed;
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        switch (other.transform.tag)
+        {
+            case "Spikes":
+                EventManager.TriggerEvent(SystemEvents.GAME_LOSE);
+                break;
+        }
+    }
 }

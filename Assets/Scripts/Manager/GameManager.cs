@@ -16,7 +16,11 @@ public class GameManager : MonoBehaviour {
     }
 
     private void onGameWin(object sender) {
-        LoadNextLevel();
+        Debug.Log("Game win");
+    }
+
+    private void onGameLose(object sender) {
+        Debug.Log("Game lose");
     }
 
     private void LoadNextLevel() {
@@ -33,9 +37,11 @@ public class GameManager : MonoBehaviour {
 
     private void AddListener() {
         EventManager.AddListener(SystemEvents.GAME_WIN, onGameWin);
+        EventManager.AddListener(SystemEvents.GAME_LOSE, onGameLose);
     }
 
     private void OnDestroy() {
         EventManager.RemoveListener(SystemEvents.GAME_WIN, onGameWin);
+        EventManager.RemoveListener(SystemEvents.GAME_LOSE, onGameLose);
     }
 }

@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour {
             case "Player":
                 EventManager.TriggerEvent(SystemEvents.GAME_WIN);
                 break;
+            
+            case "Spikes":
+                EventManager.TriggerEvent(SystemEvents.GAME_LOSE);
+                break;
         }
     }
 }
