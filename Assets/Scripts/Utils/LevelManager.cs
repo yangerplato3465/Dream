@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Linq;
+using UnityEngine.UI;
 using System.IO;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class LevelManager : MonoBehaviour
         if (instance == null) instance = this;
         else Destroy(this);
     }
+    
+    public Text levelNum;
 
     //tiles
     public List<CustomTile> tiles = new List<CustomTile>();
@@ -28,9 +31,12 @@ public class LevelManager : MonoBehaviour
 
     private void Update() {
         //save level when pressing Ctrl + Z
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) Savelevel();
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) {
+            if (levelNum.text == "") Debug.LogError("Please enter level number");
+            else Savelevel();
+        }
         //load level when pressing Ctrl + X
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X)) LoadLevel();
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X)) LoadLevel(2);
     }
 
     void Savelevel() {
@@ -39,6 +45,9 @@ public class LevelManager : MonoBehaviour
 
         //create a new leveldata
         LevelData levelData = new LevelData();
+
+        int level = Int32.Parse(levelNum.text);
+        levelData.LevelNum = level;
 
         //loop trougth the bounds of the tilemap
         for (int x = bounds.min.x; x < bounds.max.x; x++) {
@@ -77,15 +86,15 @@ public class LevelManager : MonoBehaviour
 
         //save the data as a json
         string json = JsonUtility.ToJson(levelData, true);
-        File.WriteAllText(Application.dataPath + "/LevelData/Level.json", json);
+        File.WriteAllText(Application.dataPath + "/LevelData/Level" + level + ".json", json);
 
         //debug
-        Debug.Log("Level was saved");
+        Debug.Log("Level was saved to Level" + level + ".json");
     }
 
-    void LoadLevel() {
+    void LoadLevel(int level) {
         //load the json file to a leveldata
-        string json = File.ReadAllText(Application.dataPath + "/LevelData/Level.json");
+        string json = File.ReadAllText(Application.dataPath + "/LevelData/Level" + level + ".json");
         LevelData data = JsonUtility.FromJson<LevelData>(json);
 
         //clear the tilemap
@@ -98,7 +107,8 @@ public class LevelManager : MonoBehaviour
 
         //generate key
         for (int i = 0; i < data.keys.Count; i++) {
-            Instantiate(keyPrefab, new Vector3(data.keys_poses_x[i], data.keys_poses_y[i], 0), Quaternion.identity, keyContainer);
+            GameObject key = Instantiate(keyPrefab, new Vector3(data.keys_poses_x[i], data.keys_poses_y[i], 0), Quaternion.identity, keyContainer);
+            key.GetComponent<Key>().linkCode = data.keys_link_code[i];
         }
 
         //generate lock
@@ -107,11 +117,12 @@ public class LevelManager : MonoBehaviour
         }
 
         //debug
-        Debug.Log("Level was loaded");
+        Debug.Log("Level " + level + " was loaded");
     }
 }
 
 public class LevelData {
+    public int LevelNum;
     //tiles data
     public List<string> tiles = new List<string>();
     public List<int> poses_x = new List<int>();
