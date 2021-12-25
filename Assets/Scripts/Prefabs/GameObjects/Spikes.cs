@@ -11,12 +11,17 @@ public class Spikes : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     private bool toEnd = true;
 
+    private void Start() {
+        startPoint = transform.position;
+    }
     private void Update() {
-        if(transform.position == startPoint) toEnd = true;
-        if(transform.position == endPoint) toEnd = false;
-        
-        if(toEnd) transform.position = Vector3.SmoothDamp(transform.position, endPoint, ref velocity, smoothTime);
-        else transform.position = Vector3.SmoothDamp(transform.position, startPoint, ref velocity, smoothTime);
+        if(isMoving) {
+            if(transform.position == startPoint) toEnd = true;
+            if(transform.position == endPoint) toEnd = false;
+            
+            if(toEnd) transform.position = Vector3.SmoothDamp(transform.position, endPoint, ref velocity, smoothTime);
+            else transform.position = Vector3.SmoothDamp(transform.position, startPoint, ref velocity, smoothTime);
+        }
     }
 
 }

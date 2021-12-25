@@ -8,9 +8,7 @@ public class GameManager : MonoBehaviour {
     public Animator transition;
     public float transitionTime = .5f;
 
-    // private void Awake() {
-    //     DontDestroyOnLoad(this.gameObject);
-    // }
+    private int currentLevel = 0;
     void Start() {
         AddListener();
     }

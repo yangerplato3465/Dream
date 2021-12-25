@@ -29,6 +29,18 @@ public class LevelManager : MonoBehaviour
     public Transform lockContainer;
     public GameObject lockPrefab;
 
+    //spike
+    public Transform spikeContainer;
+    public GameObject spikePrefab;
+
+    //button
+    public Transform buttonContainer;
+    public GameObject buttonPrefab;
+
+    //door
+    public Transform doorContainer;
+    public GameObject doorPrefab;
+
     private void Update() {
         //save level when pressing Ctrl + Z
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) {
@@ -76,12 +88,38 @@ public class LevelManager : MonoBehaviour
             levelData.keys_link_code.Add(key.GetComponent<Key>().linkCode);
         }
 
-        //loop through key container and save data
+        //loop through lock container and save data
         foreach (Transform locks in lockContainer) {
             levelData.locks.Add(locks.name);
             levelData.locks_poses_x.Add(locks.position.x);
             levelData.locks_poses_y.Add(locks.position.y);
             levelData.locks_link_code.Add(locks.GetComponent<Lock>().linkCode);
+        }
+
+        //loop through spike container and save data
+        foreach (Transform spike in spikeContainer) {
+            levelData.spikes.Add(spike.name);
+            levelData.spikes_poses_x.Add(spike.position.x);
+            levelData.spikes_poses_y.Add(spike.position.y);
+            levelData.spikes_end_poses_x.Add(spike.GetComponent<Spikes>().endPoint.x);
+            levelData.spikes_end_poses_y.Add(spike.GetComponent<Spikes>().endPoint.y);
+            levelData.spikes_isMoving.Add(spike.GetComponent<Spikes>().isMoving);
+        }
+
+        //loop through button container and save data
+        foreach (Transform button in buttonContainer) {
+            levelData.buttons.Add(button.name);
+            levelData.buttons_poses_x.Add(button.position.x);
+            levelData.buttons_poses_y.Add(button.position.y);
+            levelData.buttons_link_code.Add(button.GetComponent<DoubleButton>().linkCode);
+        }
+
+        //loop through door container and save data
+        foreach (Transform door in doorContainer) {
+            levelData.doors.Add(door.name);
+            levelData.doors_poses_x.Add(door.position.x);
+            levelData.doors_poses_y.Add(door.position.y);
+            levelData.doors_link_code.Add(door.GetComponent<Door>().linkCode);
         }
 
         //save the data as a json
@@ -116,6 +154,25 @@ public class LevelManager : MonoBehaviour
             Instantiate(lockPrefab, new Vector3(data.locks_poses_x[i], data.locks_poses_y[i], 0), Quaternion.identity, lockContainer);
         }
 
+        //generate spikes
+        for (int i = 0; i < data.spikes.Count; i++) {
+            GameObject spike = Instantiate(spikePrefab, new Vector3(data.spikes_poses_x[i], data.spikes_poses_y[i], 0), Quaternion.identity, spikeContainer);
+            spike.GetComponent<Spikes>().endPoint = new Vector3(data.spikes_end_poses_x[i], data.spikes_end_poses_x[i], 0);
+            spike.GetComponent<Spikes>().isMoving = data.spikes_isMoving[i];
+        }
+
+        //generate buttons
+        for (int i = 0; i < data.buttons.Count; i++) {
+            GameObject button = Instantiate(buttonPrefab, new Vector3(data.buttons_poses_x[i], data.buttons_poses_y[i], 0), Quaternion.identity, buttonContainer);
+            button.GetComponent<DoubleButton>().linkCode = data.buttons_link_code[i];
+        }
+
+        //generate door
+        for (int i = 0; i < data.doors.Count; i++) {
+            GameObject door = Instantiate(doorPrefab, new Vector3(data.doors_poses_x[i], data.doors_poses_y[i], 0), Quaternion.identity, doorContainer);
+            door.GetComponent<Door>().linkCode = data.doors_link_code[i];
+        }
+
         //debug
         Debug.Log("Level " + level + " was loaded");
     }
@@ -139,4 +196,24 @@ public class LevelData {
     public List<float> locks_poses_x = new List<float>();
     public List<float> locks_poses_y = new List<float>();
     public List<int> locks_link_code = new List<int>();
+
+    //spike data
+    public List<string> spikes = new List<string>();
+    public List<float> spikes_poses_x = new List<float>();
+    public List<float> spikes_poses_y = new List<float>();
+    public List<float> spikes_end_poses_x = new List<float>();
+    public List<float> spikes_end_poses_y = new List<float>();
+    public List<bool> spikes_isMoving = new List<bool>();
+
+    //button data
+    public List<string> buttons = new List<string>();
+    public List<float> buttons_poses_x = new List<float>();
+    public List<float> buttons_poses_y = new List<float>();
+    public List<int> buttons_link_code = new List<int>();
+
+    //door data
+    public List<string> doors = new List<string>();
+    public List<float> doors_poses_x = new List<float>();
+    public List<float> doors_poses_y = new List<float>();
+    public List<int> doors_link_code = new List<int>();
 }
