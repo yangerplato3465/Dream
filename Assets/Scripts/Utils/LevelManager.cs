@@ -17,6 +17,12 @@ public class LevelManager : MonoBehaviour
     
     public Text levelNum;
 
+    //player
+    public Transform playerPos;
+    public Transform playerMirrorPos;
+    public GameObject playerPrefab;
+    public GameObject playerMirrorPrefab;
+
     //tiles
     public List<CustomTile> tiles = new List<CustomTile>();
     public Tilemap tilemap;
@@ -40,6 +46,10 @@ public class LevelManager : MonoBehaviour
     //door
     public Transform doorContainer;
     public GameObject doorPrefab;
+
+    private void Start() {
+        EventManager.AddListener(SystemEvents.LOAD_LEVEL, onLoadLevel);
+    }
 
     private void Update() {
         //save level when pressing Ctrl + Z
@@ -79,6 +89,12 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+
+        //player data
+        levelData.player_pos_x = playerPos.position.x;
+        levelData.player_pos_y = playerPos.position.y;
+        levelData.playerMirror_pos_x = playerMirrorPos.position.x;
+        levelData.playerMirror_pos_y = playerMirrorPos.position.y;
 
         //loop through key container and save data
         foreach (Transform key in keyContainer) {
@@ -137,6 +153,7 @@ public class LevelManager : MonoBehaviour
 
         //clear the tilemap
         tilemap.ClearAllTiles();
+        ClearAllObject();
 
         //place the tiles
         for (int i = 0; i < data.tiles.Count; i++) {
@@ -173,8 +190,35 @@ public class LevelManager : MonoBehaviour
             door.GetComponent<Door>().linkCode = data.doors_link_code[i];
         }
 
+        Instantiate(playerPrefab, new Vector3(data.player_pos_x, data.player_pos_y, 0), Quaternion.identity, playerPos);
+        Instantiate(playerMirrorPrefab, new Vector3(data.playerMirror_pos_x, data.playerMirror_pos_y, 0), Quaternion.identity, playerMirrorPos);
+
         //debug
         Debug.Log("Level " + level + " was loaded");
+    }
+
+    private void ClearAllObject() {
+        destroyAllChildren(keyContainer);
+        destroyAllChildren(lockContainer);
+        destroyAllChildren(spikeContainer);
+        destroyAllChildren(buttonContainer);
+        destroyAllChildren(doorContainer);
+        destroyAllChildren(playerPos);
+        destroyAllChildren(playerMirrorPos);
+    }
+
+    private void destroyAllChildren(Transform parent) {
+        foreach(Transform item in parent) {
+            Destroy(item);
+        }
+    }
+
+    private void onLoadLevel(object sender) {
+        LoadLevel((int)sender);
+    }
+
+    private void OnDestroy() {
+        EventManager.RemoveListener(SystemEvents.LOAD_LEVEL, onLoadLevel);
     }
 }
 
@@ -184,6 +228,12 @@ public class LevelData {
     public List<string> tiles = new List<string>();
     public List<int> poses_x = new List<int>();
     public List<int> poses_y = new List<int>();
+
+    //player data
+    public float player_pos_x;
+    public float player_pos_y;
+    public float playerMirror_pos_x;
+    public float playerMirror_pos_y;
 
     //keys data
     public List<string> keys = new List<string>();

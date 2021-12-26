@@ -7,30 +7,28 @@ public class GameManager : MonoBehaviour {
 
     public Animator transition;
     public float transitionTime = .5f;
-
     private int currentLevel = 0;
+
     void Start() {
         AddListener();
     }
 
     private void onGameWin(object sender) {
+        loadLevel();
         Debug.Log("Game win");
     }
 
     private void onGameLose(object sender) {
+        restartScene();
         Debug.Log("Game lose");
     }
 
-    private void LoadNextLevel() {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    private void restartScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    IEnumerator LoadLevel(int levelIndex) {
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(transitionTime);
-
-        SceneManager.LoadScene(levelIndex);
+    private void loadLevel() {
+        EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel);
     }
 
     private void AddListener() {
