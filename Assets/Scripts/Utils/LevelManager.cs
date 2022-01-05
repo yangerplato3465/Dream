@@ -9,6 +9,7 @@ using System;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
+    public bool isEditorMode = true;
     private void Awake() {
         //set up the instance
         if (instance == null) instance = this;
@@ -62,6 +63,10 @@ public class LevelManager : MonoBehaviour
     }
 
     void Savelevel() {
+        if(!isEditorMode) {
+            Debug.Log("Can't save in gameplay mode");
+            return;
+        }
         //get the bounds of the tilemap
         BoundsInt bounds = tilemap.cellBounds;
 
