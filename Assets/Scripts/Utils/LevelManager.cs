@@ -59,7 +59,10 @@ public class LevelManager : MonoBehaviour
             else Savelevel();
         }
         //load level when pressing Ctrl + X
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X)) LoadLevel(2);
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X)) {
+            if (levelNum.text == "") Debug.LogError("Please enter level number");
+            else LoadLevel(Int32.Parse(levelNum.text));
+        }
     }
 
     void Savelevel() {

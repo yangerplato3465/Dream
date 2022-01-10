@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-
-    public Animator transition;
-    public float transitionTime = .5f;
     private int currentLevel = 0;
+    public GameObject fade;
 
     void Start() {
         AddListener();
@@ -21,6 +20,14 @@ public class GameManager : MonoBehaviour {
     private void onGameLose(object sender) {
         restartScene();
         Debug.Log("Game lose");
+    }
+
+    private void fadein() {
+        LeanTween.alpha(fade, 1f, 1f).setOnComplete(fadeout);
+    }
+
+    private void fadeout() {
+        LeanTween.alpha(fade, 0f, 1f);
     }
 
     private void restartScene() {
