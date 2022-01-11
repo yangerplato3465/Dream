@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         AddListener();
+    }
+
+    private void setCurrentLevel(object level) {
+        currentLevel = (int)level;
     }
 
     private void onGameWin(object sender) {
@@ -35,16 +39,18 @@ public class GameManager : MonoBehaviour {
     }
 
     private void loadLevel() {
-        EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel);
+        EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel + 1);
     }
 
     private void AddListener() {
         EventManager.AddListener(SystemEvents.GAME_WIN, onGameWin);
         EventManager.AddListener(SystemEvents.GAME_LOSE, onGameLose);
+        EventManager.AddListener(SystemEvents.SET_LEVEL, setCurrentLevel);
     }
 
     private void OnDestroy() {
         EventManager.RemoveListener(SystemEvents.GAME_WIN, onGameWin);
         EventManager.RemoveListener(SystemEvents.GAME_LOSE, onGameLose);
+        EventManager.AddListener(SystemEvents.SET_LEVEL, setCurrentLevel);
     }
 }

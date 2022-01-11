@@ -2,6 +2,8 @@ public class SystemEvents {
     public static string GAME_WIN = "gamewin";
     public static string GAME_LOSE = "gamelose";
     public static string LOAD_LEVEL = "loadlevel";
+    public static string SET_LEVEL = "setlevel";
+    public static string DESTROY_FOR_LOADING = "destroyforloading";
 }
 
 public class GamesEvents {

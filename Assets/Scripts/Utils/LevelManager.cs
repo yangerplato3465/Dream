@@ -155,6 +155,8 @@ public class LevelManager : MonoBehaviour
     }
 
     void LoadLevel(int level) {
+        // set current level to game manager
+        EventManager.TriggerEvent(SystemEvents.SET_LEVEL, level);
         //load the json file to a leveldata
         string json = File.ReadAllText(Application.dataPath + "/LevelData/Level" + level + ".json");
         LevelData data = JsonUtility.FromJson<LevelData>(json);
@@ -211,8 +213,7 @@ public class LevelManager : MonoBehaviour
         destroyAllChildren(spikeContainer);
         destroyAllChildren(buttonContainer);
         destroyAllChildren(doorContainer);
-        destroyAllChildren(playerPos);
-        destroyAllChildren(playerMirrorPos);
+        EventManager.TriggerEvent(SystemEvents.DESTROY_FOR_LOADING);
     }
 
     private void destroyAllChildren(Transform parent) {

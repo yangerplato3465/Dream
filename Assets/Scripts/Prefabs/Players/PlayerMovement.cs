@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public Rigidbody2D body;
     private Vector2 moveInput;
     void Start() {
+        EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 
     void Update() {
@@ -21,6 +22,10 @@ public class PlayerMovement : MonoBehaviour {
         body.velocity = moveInput * moveSpeed;
     }
 
+    private void destroySelf(object sender){
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
         switch (other.transform.tag)
         {
@@ -32,5 +37,9 @@ public class PlayerMovement : MonoBehaviour {
                 EventManager.TriggerEvent(SystemEvents.GAME_LOSE);
                 break;
         }
+    }
+
+    private void OnDestroy() {
+        EventManager.RemoveListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 }
