@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     private int currentLevel = 0;
-    public GameObject fade;
+    public RectTransform fade;
+    public float fadeTime = 1f;
+    public LeanTweenType fadeEaseType = LeanTweenType.easeInOutQuart;
 
     void Start() {
         AddListener();
@@ -17,7 +19,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void onGameWin(object sender) {
-        loadLevel();
+        fadein();
         Debug.Log("Game win");
     }
 
@@ -27,11 +29,12 @@ public class GameManager : MonoBehaviour {
     }
 
     private void fadein() {
-        LeanTween.alpha(fade, 1f, 1f).setOnComplete(fadeout);
+        LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeout);
     }
 
     private void fadeout() {
-        LeanTween.alpha(fade, 0f, 1f);
+        loadLevel();
+        LeanTween.alpha(fade, 0f, fadeTime).setEase(fadeEaseType);
     }
 
     private void restartScene() {
