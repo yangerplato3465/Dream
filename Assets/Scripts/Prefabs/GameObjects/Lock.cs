@@ -7,11 +7,20 @@ public class Lock : MonoBehaviour {
         if(linkCode != 0) {
             EventManager.AddListener(GamesEvents.LOCK_OPEN, onLockOpen);
         }
+        EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 
     private void onLockOpen(object sender) {
         if((int)sender == linkCode) {
             Destroy(gameObject);
         }
+    }
+
+    private void destroySelf(object sender) {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy() {
+        EventManager.RemoveListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 }

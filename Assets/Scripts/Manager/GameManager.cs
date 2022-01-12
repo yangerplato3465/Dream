@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     private int currentLevel = 0;
     public RectTransform fade;
+    public RectTransform redFade;
     public float fadeTime = 1f;
     public LeanTweenType fadeEaseType = LeanTweenType.easeInOutQuart;
 
@@ -19,26 +20,35 @@ public class GameManager : MonoBehaviour {
     }
 
     private void onGameWin(object sender) {
-        fadein();
+        fadeinBlack();
         Debug.Log("Game win");
     }
 
     private void onGameLose(object sender) {
-        restartScene();
+        fadeinRed();
         Debug.Log("Game lose");
     }
 
-    private void fadein() {
-        LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeout);
+    private void fadeinBlack() {
+        LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
     }
 
-    private void fadeout() {
+    private void fadeoutBlack() {
         loadLevel();
         LeanTween.alpha(fade, 0f, fadeTime).setEase(fadeEaseType);
     }
 
-    private void restartScene() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    private void fadeinRed() {
+        LeanTween.alpha(redFade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutRed);
+    }
+
+    private void fadeoutRed() {
+        restartLevel();
+        LeanTween.alpha(redFade, 0f, fadeTime).setEase(fadeEaseType);
+    }
+
+    private void restartLevel() {
+        EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel);
     }
 
     private void loadLevel() {

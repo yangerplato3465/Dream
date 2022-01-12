@@ -10,6 +10,7 @@ public class Door : MonoBehaviour {
             EventManager.AddListener(GamesEvents.TRIGGER_BUTTON, onTriggered);
             EventManager.AddListener(GamesEvents.UNTRIGGER_BUTTON, onUntriggered);
         }
+        EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 
     private void onTriggered(object sender) {
@@ -29,8 +30,13 @@ public class Door : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    private void destroySelf(object sender) {
+        Destroy(gameObject);
+    }
+
     private void OnDestroy() {
         EventManager.RemoveListener(GamesEvents.TRIGGER_BUTTON, onTriggered);
         EventManager.RemoveListener(GamesEvents.UNTRIGGER_BUTTON, onUntriggered);
+        EventManager.RemoveListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 }

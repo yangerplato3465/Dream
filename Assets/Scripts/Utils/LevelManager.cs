@@ -122,12 +122,15 @@ public class LevelManager : MonoBehaviour
 
         //loop through spike container and save data
         foreach (Transform spike in spikeContainer) {
+            Spikes spikeComponent = spike.GetComponent<Spikes>();
             levelData.spikes.Add(spike.name);
-            levelData.spikes_poses_x.Add(spike.position.x);
-            levelData.spikes_poses_y.Add(spike.position.y);
-            levelData.spikes_end_poses_x.Add(spike.GetComponent<Spikes>().endPoint.x);
-            levelData.spikes_end_poses_y.Add(spike.GetComponent<Spikes>().endPoint.y);
-            levelData.spikes_isMoving.Add(spike.GetComponent<Spikes>().isMoving);
+            levelData.spikes_poses_x.Add(spikeComponent.startPoint.x);
+            levelData.spikes_poses_y.Add(spikeComponent.startPoint.y);
+            levelData.spikes_end_poses_x.Add(spikeComponent.endPoint.x);
+            levelData.spikes_end_poses_y.Add(spikeComponent.endPoint.y);
+            levelData.spikes_isMoving.Add(spikeComponent.isMoving);
+            levelData.spikes_time.Add(spikeComponent.time);
+            levelData.spikes_delay_time.Add(spikeComponent.delayTime);
         }
 
         //loop through button container and save data
@@ -184,8 +187,11 @@ public class LevelManager : MonoBehaviour
         //generate spikes
         for (int i = 0; i < data.spikes.Count; i++) {
             GameObject spike = Instantiate(spikePrefab, new Vector3(data.spikes_poses_x[i], data.spikes_poses_y[i], 0), Quaternion.identity, spikeContainer);
-            spike.GetComponent<Spikes>().endPoint = new Vector3(data.spikes_end_poses_x[i], data.spikes_end_poses_x[i], 0);
+            spike.GetComponent<Spikes>().startPoint = new Vector3(data.spikes_poses_x[i], data.spikes_poses_y[i], 0);
+            spike.GetComponent<Spikes>().endPoint = new Vector3(data.spikes_end_poses_x[i], data.spikes_end_poses_y[i], 0);
             spike.GetComponent<Spikes>().isMoving = data.spikes_isMoving[i];
+            spike.GetComponent<Spikes>().time = data.spikes_time[i];
+            spike.GetComponent<Spikes>().delayTime = data.spikes_delay_time[i];
         }
 
         //generate buttons
@@ -208,18 +214,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void ClearAllObject() {
-        destroyAllChildren(keyContainer);
-        destroyAllChildren(lockContainer);
-        destroyAllChildren(spikeContainer);
-        destroyAllChildren(buttonContainer);
-        destroyAllChildren(doorContainer);
         EventManager.TriggerEvent(SystemEvents.DESTROY_FOR_LOADING);
-    }
-
-    private void destroyAllChildren(Transform parent) {
-        foreach(Transform item in parent) {
-            Destroy(item);
-        }
     }
 
     private void onLoadLevel(object sender) {
@@ -263,6 +258,8 @@ public class LevelData {
     public List<float> spikes_end_poses_x = new List<float>();
     public List<float> spikes_end_poses_y = new List<float>();
     public List<bool> spikes_isMoving = new List<bool>();
+    public List<float> spikes_time = new List<float>();
+    public List<float> spikes_delay_time = new List<float>();
 
     //button data
     public List<string> buttons = new List<string>();

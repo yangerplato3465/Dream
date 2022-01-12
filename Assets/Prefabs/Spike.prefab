@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 1
-  smoothTime: 0.15
+  time: 1
+  delayTime: 0.5
   startPoint: {x: 0, y: 0, z: 0}
-  endPoint: {x: 4, y: 0, z: 0}
+  endPoint: {x: 0, y: 0, z: 0}
