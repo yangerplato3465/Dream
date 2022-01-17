@@ -181,7 +181,8 @@ public class LevelManager : MonoBehaviour
 
         //generate lock
         for (int i = 0; i < data.locks.Count; i++) {
-            Instantiate(lockPrefab, new Vector3(data.locks_poses_x[i], data.locks_poses_y[i], 0), Quaternion.identity, lockContainer);
+            GameObject locks = Instantiate(lockPrefab, new Vector3(data.locks_poses_x[i], data.locks_poses_y[i], 0), Quaternion.identity, lockContainer);
+            locks.GetComponent<Lock>().linkCode = data.locks_link_code[i];
         }
 
         //generate spikes

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     private int currentLevel = 0;
@@ -10,9 +6,15 @@ public class GameManager : MonoBehaviour {
     public RectTransform redFade;
     public float fadeTime = 1f;
     public LeanTweenType fadeEaseType = LeanTweenType.easeInOutQuart;
+    public GameObject restartButton;
 
     void Start() {
         AddListener();
+    }
+
+    public void onRestartButtonClick() {
+        fadeinRed();
+        LeanTween.scale(restartButton, Vector3.one * 1.2f, 1).setEasePunch();
     }
 
     private void setCurrentLevel(object level) {
@@ -39,6 +41,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void fadeinRed() {
+        if(currentLevel == 0) {
+            Debug.Log("Not in a level");
+            return;
+        }
         LeanTween.alpha(redFade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutRed);
     }
 

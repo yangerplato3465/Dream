@@ -9,11 +9,9 @@ public class Spikes : MonoBehaviour {
     public float delayTime = .5f;
     public Vector3 startPoint;
     public Vector3 endPoint;
-    private Vector3 velocity = Vector3.zero;
-    private bool toEnd = true;
 
     private void Start() {
-        // startPoint = transform.position;
+        startPoint = transform.position;
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
         if(isMoving) moveToEnd();
     }

@@ -21,6 +21,7 @@ public class Lock : MonoBehaviour {
     }
 
     private void OnDestroy() {
+        EventManager.RemoveListener(GamesEvents.LOCK_OPEN, onLockOpen);
         EventManager.RemoveListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 }
