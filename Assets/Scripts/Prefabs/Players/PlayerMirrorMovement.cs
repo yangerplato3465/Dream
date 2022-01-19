@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMirrorMovement : MonoBehaviour {
     public float moveSpeed;
@@ -12,8 +13,8 @@ public class PlayerMirrorMovement : MonoBehaviour {
     }
 
     void Update() {
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
+        moveInput.x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+        moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y));
 
