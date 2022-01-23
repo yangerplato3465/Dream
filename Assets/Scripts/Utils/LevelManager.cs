@@ -9,6 +9,7 @@ using System;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
+    public Camera cameras;
     public bool isEditorMode = true;
     private void Awake() {
         //set up the instance
@@ -78,6 +79,7 @@ public class LevelManager : MonoBehaviour
 
         int level = Int32.Parse(levelNum.text);
         levelData.LevelNum = level;
+        levelData.camera_size = cameras.orthographicSize;
 
         //loop trougth the bounds of the tilemap
         for (int x = bounds.min.x; x < bounds.max.x; x++) {
@@ -168,6 +170,9 @@ public class LevelManager : MonoBehaviour
         tilemap.ClearAllTiles();
         ClearAllObject();
 
+        // set camera size
+        cameras.orthographicSize = data.camera_size;
+
         //place the tiles
         for (int i = 0; i < data.tiles.Count; i++) {
             tilemap.SetTile(new Vector3Int(data.poses_x[i], data.poses_y[i], 0), tiles.Find(t => t.name == data.tiles[i]).tile);
@@ -229,6 +234,7 @@ public class LevelManager : MonoBehaviour
 
 public class LevelData {
     public int LevelNum;
+    public float camera_size;
     //tiles data
     public List<string> tiles = new List<string>();
     public List<int> poses_x = new List<int>();

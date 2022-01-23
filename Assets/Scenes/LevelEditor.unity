@@ -2411,7 +2411,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 952168243}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3057,7 +3057,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 952168243}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3215,10 +3215,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1363703988}
+  - {fileID: 1313858859}
   - {fileID: 294862815}
   - {fileID: 532787464}
   - {fileID: 1703458418}
-  - {fileID: 1313858859}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3256,6 +3256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3cabd66ab467b4ab4ad771c3f19bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameras: {fileID: 519420031}
   isEditorMode: 1
   levelNum: {fileID: 1015044327}
   playerPos: {fileID: 2051426875}
@@ -3407,7 +3408,7 @@ RectTransform:
   - {fileID: 80565479}
   - {fileID: 1415315275}
   m_Father: {fileID: 952168243}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3426,8 +3427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c12ffab6a0864b0bb7db6a9ab5775ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal: 0
-  vertical: 0
 --- !u!1 &1363703987
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,7 +3763,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 952168243}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

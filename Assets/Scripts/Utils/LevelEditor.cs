@@ -13,12 +13,12 @@ public class LevelEditor : MonoBehaviour{
 
     private void Update()
     {
-        Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
+        // Vector3Int pos = currentTilemap.WorldToCell(cam.ScreenToWorldPoint(Input.mousePosition));
 
         //place tile with left click
-        if (Input.GetMouseButton(0)) PlaceTile(pos);
+        // if (Input.GetMouseButton(0)) PlaceTile(pos);
         //delete tile with right click
-        if (Input.GetMouseButton(1)) DeleteTile(pos);
+        // if (Input.GetMouseButton(1)) DeleteTile(pos);
     }
 
     /// <summary>
