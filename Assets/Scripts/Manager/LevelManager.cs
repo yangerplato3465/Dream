@@ -55,18 +55,18 @@ public class LevelManager : MonoBehaviour
 
     private void Update() {
         //save level when pressing Ctrl + Z
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) {
-            if (levelNum.text == "") Debug.LogError("Please enter level number");
-            else Savelevel();
-        }
-        //load level when pressing Ctrl + X
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X)) {
+        // if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) {
+        //     if (levelNum.text == "") Debug.LogError("Please enter level number");
+        //     else Savelevel();
+        // }
+        //load level when pressing Ctrl + L
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.L)) {
             if (levelNum.text == "") Debug.LogError("Please enter level number");
             else LoadLevel(Int32.Parse(levelNum.text));
         }
     }
 
-    void Savelevel() {
+    public void Savelevel() {
         if(!isEditorMode) {
             Debug.Log("Can't save in gameplay mode");
             return;
@@ -159,7 +159,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Level was saved to Level" + level + ".json");
     }
 
-    void LoadLevel(int level) {
+    public void LoadLevel(int level) {
         // set current level to game manager
         EventManager.TriggerEvent(SystemEvents.SET_LEVEL, level);
         //load the json file to a leveldata
