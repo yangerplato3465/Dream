@@ -33,4 +33,32 @@ public class AudioManager : MonoBehaviour {
         }
         sound.source.Play();
     }
+
+    public void Mute(string name) {
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if(sound == null) {
+            Debug.LogWarning("Did not found sound file: " + name);
+            return;
+        }
+        sound.source.volume = 0f;
+    }
+
+    public void Unmute(string name) {
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if(sound == null) {
+            Debug.LogWarning("Did not found sound file: " + name);
+            return;
+        }
+        sound.source.volume = 1f;
+    }
+
+    public static void ToggleAllSFX(bool disable) {
+        if(disable){
+            instance.Mute(SoundConst.BUTTON_CLICK);
+            instance.Mute(SoundConst.BUTTON_CLOSE);
+        } else {
+            instance.Unmute(SoundConst.BUTTON_CLICK);
+            instance.Unmute(SoundConst.BUTTON_CLOSE);
+        }
+    }
 }
