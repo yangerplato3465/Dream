@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.IO;
 using System;
+using Lean.Localization;
 
 public class LevelManager : MonoBehaviour
 {
@@ -167,7 +168,7 @@ public class LevelManager : MonoBehaviour
             levelData.texts_start_time.Add(text.GetComponent<FadingText>().startTime);
             levelData.texts_appear_time.Add(text.GetComponent<FadingText>().appearTime);
             levelData.texts_duration_time.Add(text.GetComponent<FadingText>().duration);
-            levelData.texts_string.Add(text.GetComponentInChildren<Text>().text);
+            levelData.texts_id.Add(text.GetComponentInChildren<Text>().text);
         }
 
         //save the data as a json
@@ -237,7 +238,7 @@ public class LevelManager : MonoBehaviour
             text.GetComponent<FadingText>().startTime = data.texts_start_time[i];
             text.GetComponent<FadingText>().appearTime = data.texts_appear_time[i];
             text.GetComponent<FadingText>().duration = data.texts_duration_time[i];
-            text.GetComponentInChildren<Text>().text = data.texts_string[i];
+            text.GetComponentInChildren<Text>().text = LeanLocalization.GetTranslationText(data.texts_id[i]);
         }
 
         Instantiate(playerPrefab, new Vector3(data.player_pos_x, data.player_pos_y, 0), Quaternion.identity, playerPos);
@@ -315,5 +316,5 @@ public class LevelData {
     public List<float> texts_start_time = new List<float>();
     public List<float> texts_appear_time = new List<float>();
     public List<float> texts_duration_time = new List<float>();
-    public List<string> texts_string = new List<string>();
+    public List<string> texts_id = new List<string>();
 }
