@@ -12,6 +12,7 @@ public class FadingText : MonoBehaviour {
     void Start() {
         text.LeanAlphaText(0f, 0f);
         Fadein();
+        EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 
     private void Fadein() {
@@ -22,4 +23,11 @@ public class FadingText : MonoBehaviour {
         text.LeanAlphaText(0f, appearTime).setDelay(duration).setOnComplete(() => {Destroy(gameObject);});
     }
     
+    private void destroySelf(object sender) {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy() {
+        EventManager.RemoveListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
+    }
 }

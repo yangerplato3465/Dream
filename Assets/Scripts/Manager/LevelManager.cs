@@ -49,6 +49,10 @@ public class LevelManager : MonoBehaviour
     public Transform doorContainer;
     public GameObject doorPrefab;
 
+    //text
+    public Transform textContainer;
+    public GameObject textPrefab;
+
     private void Start() {
         EventManager.AddListener(SystemEvents.LOAD_LEVEL, onLoadLevel);
     }
@@ -69,6 +73,10 @@ public class LevelManager : MonoBehaviour
     public void Savelevel() {
         if(!isEditorMode) {
             Debug.Log("Can't save in gameplay mode");
+            return;
+        }
+        if (levelNum.text == "") {
+            Debug.LogError("Please enter level number");
             return;
         }
         //get the bounds of the tilemap
@@ -151,6 +159,17 @@ public class LevelManager : MonoBehaviour
             levelData.doors_link_code.Add(door.GetComponent<Door>().linkCode);
         }
 
+        //loop through text container and save data
+        foreach (Transform text in textContainer) {
+            levelData.texts.Add(text.name);
+            levelData.texts_poses_x.Add(text.position.x);
+            levelData.texts_poses_y.Add(text.position.y);
+            levelData.texts_start_time.Add(text.GetComponent<FadingText>().startTime);
+            levelData.texts_appear_time.Add(text.GetComponent<FadingText>().appearTime);
+            levelData.texts_duration_time.Add(text.GetComponent<FadingText>().duration);
+            levelData.texts_string.Add(text.GetComponentInChildren<Text>().text);
+        }
+
         //save the data as a json
         string json = JsonUtility.ToJson(levelData, true);
         File.WriteAllText(Application.dataPath + "/LevelData/Level" + level + ".json", json);
@@ -210,6 +229,15 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < data.doors.Count; i++) {
             GameObject door = Instantiate(doorPrefab, new Vector3(data.doors_poses_x[i], data.doors_poses_y[i], 0), Quaternion.identity, doorContainer);
             door.GetComponent<Door>().linkCode = data.doors_link_code[i];
+        }
+
+        //generate text
+        for (int i = 0; i < data.texts.Count; i++) {
+            GameObject text = Instantiate(textPrefab, new Vector3(data.texts_poses_x[i], data.texts_poses_y[i], 0), Quaternion.identity, textContainer);
+            text.GetComponent<FadingText>().startTime = data.texts_start_time[i];
+            text.GetComponent<FadingText>().appearTime = data.texts_appear_time[i];
+            text.GetComponent<FadingText>().duration = data.texts_duration_time[i];
+            text.GetComponentInChildren<Text>().text = data.texts_string[i];
         }
 
         Instantiate(playerPrefab, new Vector3(data.player_pos_x, data.player_pos_y, 0), Quaternion.identity, playerPos);
@@ -279,4 +307,13 @@ public class LevelData {
     public List<float> doors_poses_x = new List<float>();
     public List<float> doors_poses_y = new List<float>();
     public List<int> doors_link_code = new List<int>();
+
+    //text data
+    public List<string> texts = new List<string>();
+    public List<float> texts_poses_x = new List<float>();
+    public List<float> texts_poses_y = new List<float>();
+    public List<float> texts_start_time = new List<float>();
+    public List<float> texts_appear_time = new List<float>();
+    public List<float> texts_duration_time = new List<float>();
+    public List<string> texts_string = new List<string>();
 }

@@ -1,6 +1,6 @@
 {
     "LevelNum": 1,
-    "camera_size": 6.0,
+    "camera_size": 5.0,
     "tiles": [
         "Wall",
         "Wall",
@@ -998,5 +998,26 @@
     "doors": [],
     "doors_poses_x": [],
     "doors_poses_y": [],
-    "doors_link_code": []
+    "doors_link_code": [],
+    "texts": [
+        "FadingText"
+    ],
+    "texts_poses_x": [
+        0.0
+    ],
+    "texts_poses_y": [
+        3.0
+    ],
+    "texts_start_time": [
+        0.5
+    ],
+    "texts_appear_time": [
+        1.0
+    ],
+    "texts_duration_time": [
+        5.0
+    ],
+    "texts_string": [
+        "Test test test test test"
+    ]
 }
