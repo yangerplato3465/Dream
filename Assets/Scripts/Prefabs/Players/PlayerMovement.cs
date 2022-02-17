@@ -8,11 +8,13 @@ public class PlayerMovement : MonoBehaviour {
     public Animator animator;
     public Rigidbody2D body;
     private Vector2 moveInput;
+    private bool canMove;
     void Start() {
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 
     void Update() {
+        if(!canMove) return;
         moveInput.x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
         moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
@@ -31,10 +33,12 @@ public class PlayerMovement : MonoBehaviour {
         switch (other.transform.tag)
         {
             case "Player":
+                canMove = false;
                 EventManager.TriggerEvent(SystemEvents.GAME_WIN);
                 break;
             
             case "Spikes":
+                canMove = false;
                 EventManager.TriggerEvent(SystemEvents.GAME_LOSE);
                 break;
         }

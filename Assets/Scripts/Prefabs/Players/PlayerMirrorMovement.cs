@@ -8,11 +8,13 @@ public class PlayerMirrorMovement : MonoBehaviour {
     public Animator animator;
     public Rigidbody2D body;
     private Vector2 moveInput;
+    private bool canMove = true; 
     void Start() {
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
 
     void Update() {
+        if(!canMove) return;
         moveInput.x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
         moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
@@ -31,6 +33,7 @@ public class PlayerMirrorMovement : MonoBehaviour {
         switch (other.transform.tag)
         {
             case "Spikes":
+                canMove = false;
                 EventManager.TriggerEvent(SystemEvents.GAME_LOSE);
                 break;
         }
