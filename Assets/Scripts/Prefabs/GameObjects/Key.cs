@@ -6,6 +6,7 @@ public class Key : MonoBehaviour {
 
     private void Start() {
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
+        waveAnimation();
     }
     
     private void OnTriggerEnter2D(Collider2D other) {
@@ -13,6 +14,13 @@ public class Key : MonoBehaviour {
             Destroy(gameObject);
             EventManager.TriggerEvent(GamesEvents.LOCK_OPEN, linkCode);
         }
+    }
+
+    private void waveAnimation() {
+        float xPos = transform.position.x;
+        float yPos = transform.position.y;
+
+        LeanTween.moveY(gameObject, yPos + 0.3f, 0.3f);
     }
 
     private void destroySelf(object sender) {

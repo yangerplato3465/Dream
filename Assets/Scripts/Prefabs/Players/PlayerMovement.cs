@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public Animator animator;
     public Rigidbody2D body;
     private Vector2 moveInput;
-    private bool canMove;
+    private bool canMove = true;
     void Start() {
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
     }
