@@ -11,4 +11,5 @@ public class GamesEvents {
     public static string TRIGGER_BUTTON = "triggerbutton";
     public static string UNTRIGGER_BUTTON = "untriggerbutton";
     public static string DOOR_OPEN = "dooropen";
+    public static string COLLECT_GEM = "collectgem";
 }

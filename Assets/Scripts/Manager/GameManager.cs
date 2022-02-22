@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public float fadeTime = 1f;
     public LeanTweenType fadeEaseType = LeanTweenType.easeInOutQuart;
     public GameObject restartButton;
+    private int gemCount = 0;
 
     //Admobstuff
     private InterstitialAd interstitial;
@@ -38,6 +39,10 @@ public class GameManager : MonoBehaviour {
     private void onGameLose(object sender) {
         fadeinRed();
         Debug.Log("Game lose");
+    }
+
+    private void onGotGem(object sender) {
+        gemCount += 1;
     }
 
     private void fadeinBlack() {
@@ -130,11 +135,13 @@ public class GameManager : MonoBehaviour {
         EventManager.AddListener(SystemEvents.GAME_WIN, onGameWin);
         EventManager.AddListener(SystemEvents.GAME_LOSE, onGameLose);
         EventManager.AddListener(SystemEvents.SET_LEVEL, setCurrentLevel);
+        EventManager.AddListener(GamesEvents.COLLECT_GEM, setCurrentLevel);
     }
 
     private void OnDestroy() {
         EventManager.RemoveListener(SystemEvents.GAME_WIN, onGameWin);
         EventManager.RemoveListener(SystemEvents.GAME_LOSE, onGameLose);
-        EventManager.AddListener(SystemEvents.SET_LEVEL, setCurrentLevel);
+        EventManager.RemoveListener(SystemEvents.SET_LEVEL, setCurrentLevel);
+        EventManager.RemoveListener(GamesEvents.COLLECT_GEM, setCurrentLevel);
     }
 }

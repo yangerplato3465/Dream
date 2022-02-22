@@ -54,6 +54,10 @@ public class LevelManager : MonoBehaviour
     public Transform textContainer;
     public GameObject textPrefab;
 
+    //gem
+    public Transform gemContainer;
+    public GameObject gemPrefab;
+
     private void Start() {
         EventManager.AddListener(SystemEvents.LOAD_LEVEL, onLoadLevel);
     }
@@ -171,6 +175,13 @@ public class LevelManager : MonoBehaviour
             levelData.texts_id.Add(text.GetComponentInChildren<Text>().text);
         }
 
+        //loop through door container and save data
+        foreach (Transform gem in gemContainer) {
+            levelData.gems.Add(gem.name);
+            levelData.gems_poses_x.Add(gem.position.x);
+            levelData.gems_poses_y.Add(gem.position.y);
+        }
+
         //save the data as a json
         string json = JsonUtility.ToJson(levelData, true);
         File.WriteAllText(Application.dataPath + "/LevelData/Level" + level + ".json", json);
@@ -239,6 +250,11 @@ public class LevelManager : MonoBehaviour
             text.GetComponent<FadingText>().appearTime = data.texts_appear_time[i];
             text.GetComponent<FadingText>().duration = data.texts_duration_time[i];
             text.GetComponentInChildren<Text>().text = LeanLocalization.GetTranslationText(data.texts_id[i]);
+        }
+
+        //generate door
+        for (int i = 0; i < data.gems.Count; i++) {
+            Instantiate(doorPrefab, new Vector3(data.gems_poses_x[i], data.gems_poses_y[i], 0), Quaternion.identity, doorContainer);
         }
 
         Instantiate(playerPrefab, new Vector3(data.player_pos_x, data.player_pos_y, 0), Quaternion.identity, playerPos);
@@ -317,4 +333,9 @@ public class LevelData {
     public List<float> texts_appear_time = new List<float>();
     public List<float> texts_duration_time = new List<float>();
     public List<string> texts_id = new List<string>();
+
+    //gem data
+    public List<string> gems = new List<string>();
+    public List<float> gems_poses_x = new List<float>();
+    public List<float> gems_poses_y = new List<float>();
 }

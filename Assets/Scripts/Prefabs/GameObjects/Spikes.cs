@@ -17,11 +17,11 @@ public class Spikes : MonoBehaviour {
     }
 
     private void moveToEnd() {
-        LeanTween.move(gameObject, endPoint, time).setOnComplete(moveToStart).setEaseOutCubic().setDelay(delayTime);
+        LeanTween.move(gameObject, endPoint, time).setOnComplete(moveToStart).setEaseInOutSine().setDelay(delayTime);
     }
 
     private void moveToStart() {
-        LeanTween.move(gameObject, startPoint, time).setOnComplete(moveToEnd).setEaseOutCubic().setDelay(delayTime);
+        LeanTween.move(gameObject, startPoint, time).setOnComplete(moveToEnd).setEaseInOutSine().setDelay(delayTime);
     }
 
     private void destroySelf(object sender) {

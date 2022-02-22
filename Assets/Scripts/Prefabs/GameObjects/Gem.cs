@@ -1,25 +1,24 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Key : MonoBehaviour {
+public class Gem : MonoBehaviour {
 
-    public int linkCode = 0;
     private float top = 0f;
     private float bottom = 0f;
     private float randomDelay = 0f;
-
-
-    private void Start() {
+    void Start() {
         top = transform.position.y + 0.1f;
         bottom = transform.position.y - 0.1f;
         randomDelay = Random.Range(0f, 1f);
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
         LeanTween.moveY(gameObject, top, .8f).setOnComplete(FloatingDown).setEaseInOutSine().setDelay(randomDelay);
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.transform.tag == "Player"){ 
             Destroy(gameObject);
-            EventManager.TriggerEvent(GamesEvents.LOCK_OPEN, linkCode);
+            EventManager.TriggerEvent(GamesEvents.COLLECT_GEM);
         }
     }
 
