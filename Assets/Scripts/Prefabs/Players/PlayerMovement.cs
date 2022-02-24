@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour {
         switch (other.transform.tag)
         {
             case "Player":
-                canMove = false;
                 EventManager.TriggerEvent(SystemEvents.GAME_WIN);
                 break;
             

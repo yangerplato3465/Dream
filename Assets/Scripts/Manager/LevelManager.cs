@@ -175,7 +175,7 @@ public class LevelManager : MonoBehaviour
             levelData.texts_id.Add(text.GetComponentInChildren<Text>().text);
         }
 
-        //loop through door container and save data
+        //loop through gem container and save data
         foreach (Transform gem in gemContainer) {
             levelData.gems.Add(gem.name);
             levelData.gems_poses_x.Add(gem.position.x);
@@ -252,9 +252,9 @@ public class LevelManager : MonoBehaviour
             text.GetComponentInChildren<Text>().text = LeanLocalization.GetTranslationText(data.texts_id[i]);
         }
 
-        //generate door
+        //generate gem
         for (int i = 0; i < data.gems.Count; i++) {
-            Instantiate(doorPrefab, new Vector3(data.gems_poses_x[i], data.gems_poses_y[i], 0), Quaternion.identity, doorContainer);
+            Instantiate(gemPrefab, new Vector3(data.gems_poses_x[i], data.gems_poses_y[i], 0), Quaternion.identity, gemContainer);
         }
 
         Instantiate(playerPrefab, new Vector3(data.player_pos_x, data.player_pos_y, 0), Quaternion.identity, playerPos);

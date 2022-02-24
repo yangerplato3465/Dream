@@ -14,6 +14,17 @@ public class GameManager : MonoBehaviour {
     //Admobstuff
     private InterstitialAd interstitial;
 
+    [Header("Level end panel")]
+    public RectTransform levelEndPanel;
+    public RectTransform levelText;
+    public RectTransform completeText;
+    public GameObject gem1;
+    public GameObject gem2;
+    public GameObject gem3;
+    public ParticleSystem particle1;
+    public ParticleSystem particle2;
+    public ParticleSystem particle3;
+
     void Start() {
         AddListener();
         MobileAds.Initialize(initStatus => { 
@@ -32,7 +43,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void onGameWin(object sender) {
-        fadeinBlack();
+        showLevelEndPanel();
         Debug.Log("Game win");
     }
 
@@ -41,8 +52,36 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Game lose");
     }
 
-    private void onGotGem(object sender) {
+    private void onCollectGem(object sender) {
         gemCount += 1;
+    }
+
+    public void showLevelEndPanel() {
+        levelEndPanel.gameObject.SetActive(true);
+        LeanTween.scale(levelEndPanel.gameObject, Vector3.one * 1.1f, .6f).setEaseShake().setOnComplete(() => {
+            particle1.Play();
+            LeanTween.scale(levelText.gameObject, Vector3.one * 1.5f, .6f).setEasePunch().setOnComplete(() => {
+                particle2.Play();
+                particle3.Play();
+                LeanTween.scale(completeText.gameObject, Vector3.one * 1.2f, .6f).setEasePunch().setOnComplete(showGemAnimation);
+            });
+        });
+    }
+
+    private void showGemAnimation() {
+        if(gemCount == 0) return;
+        gem1.SetActive(true);
+        LeanTween.scale(gem1, Vector3.one * 1.5f, .6f).setEasePunch().setOnComplete(() => {
+            if(gemCount > 1) {
+                gem2.SetActive(true);
+                LeanTween.scale(gem2, Vector3.one * 1.5f, .6f).setEasePunch().setOnComplete(() => {
+                    if(gemCount > 2) {
+                        gem3.SetActive(true);
+                        LeanTween.scale(gem3, Vector3.one * 1.5f, .6f).setEasePunch();
+                    }
+                });
+            }
+        });
     }
 
     private void fadeinBlack() {
@@ -135,13 +174,13 @@ public class GameManager : MonoBehaviour {
         EventManager.AddListener(SystemEvents.GAME_WIN, onGameWin);
         EventManager.AddListener(SystemEvents.GAME_LOSE, onGameLose);
         EventManager.AddListener(SystemEvents.SET_LEVEL, setCurrentLevel);
-        EventManager.AddListener(GamesEvents.COLLECT_GEM, setCurrentLevel);
+        EventManager.AddListener(GamesEvents.COLLECT_GEM, onCollectGem);
     }
 
     private void OnDestroy() {
         EventManager.RemoveListener(SystemEvents.GAME_WIN, onGameWin);
         EventManager.RemoveListener(SystemEvents.GAME_LOSE, onGameLose);
         EventManager.RemoveListener(SystemEvents.SET_LEVEL, setCurrentLevel);
-        EventManager.RemoveListener(GamesEvents.COLLECT_GEM, setCurrentLevel);
+        EventManager.RemoveListener(GamesEvents.COLLECT_GEM, onCollectGem);
     }
 }
