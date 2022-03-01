@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     public ParticleSystem particle2;
     public ParticleSystem particle3;
 
+
     void Start() {
         AddListener();
         MobileAds.Initialize(initStatus => { 
@@ -116,9 +117,9 @@ public class GameManager : MonoBehaviour {
 
     private void RequestInterstitial() {
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+            string adUnitId = Config.ANDROID_INTERSTITIAL;
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+            string adUnitId = Config.IOS_INTERSTITIAL;
         #else
             string adUnitId = "unexpected_platform";
         #endif
