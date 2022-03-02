@@ -9,15 +9,22 @@ public class MenuView : MonoBehaviour {
     public RectTransform shopPanel;
     public GameObject circleSwipe;
     private RewardedAd rewardedAd;
+    private string rewardType;
+    
+    [Header("Shop Buttons")]
+    public Button greenButton;
+    public Button blueButton;
+    public Button redButton;
+    public Button orangeButton;
 
     private void Awake() {
         LeanTween.moveX(circleSwipe, 0f, 0f);
     }
 
     void Start() {
-        Debug.Log("start functin");
         LeanTween.moveLocalX(circleSwipe, -2400f, 1f).setEaseOutQuad();
         CreateAndLoadAd();
+        UpdateShop();
     }
 
     private void CreateAndLoadAd() {
@@ -66,6 +73,7 @@ public class MenuView : MonoBehaviour {
 
     public void HandleRewardedAdClosed(object sender, EventArgs args) {
         Debug.Log("HandleRewardedAdClosed event received");
+        
         CreateAndLoadAd();
     }
 
@@ -73,10 +81,79 @@ public class MenuView : MonoBehaviour {
         string type = args.Type;
         double amount = args.Amount;
         Debug.Log("HandleRewardedAdRewarded event received for " + amount.ToString() + " " + type);
+        if(rewardType == null) {
+            Debug.LogWarning("Something went wrong while giving reward");
+            return;
+        }
+        UnlockAliens(rewardType);
     }
 
-    public void ShowAd() {
-        if (this.rewardedAd.IsLoaded()) {
+    private void UnlockAliens(string type){
+        switch(type){
+            case "blue":
+                PlayerPrefs.SetInt(PlayerprefConst.BLUE_UNLOCKED, 1);
+                break;
+
+            case "red":
+                PlayerPrefs.SetInt(PlayerprefConst.RED_UNLOCKED, 1);
+                break;
+
+            case "orange":
+                PlayerPrefs.SetInt(PlayerprefConst.ORANGE_UNLOCKED, 1);
+                break;
+        }
+        UpdateShop();
+    }
+
+    private void UpdateShop() {
+        if(PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE) == "") {
+            PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.GREEN);
+        }
+        string alienInUse = PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE);
+        Text greenBtnText = greenButton.transform.GetChild(0).GetComponent<Text>();
+        Text blueBtnText = blueButton.transform.GetChild(0).GetComponent<Text>();
+        Text redBtnText = redButton.transform.GetChild(0).GetComponent<Text>();
+        Text orangeBtnText = orangeButton.transform.GetChild(0).GetComponent<Text>();
+        Transform blueAd = blueButton.transform.GetChild(1);
+        Transform redAd = redButton.transform.GetChild(1);
+        Transform orangeAd = orangeButton.transform.GetChild(1);
+
+        greenBtnText.text = alienInUse == PlayerprefConst.GREEN ? "in use" : "use";
+        blueBtnText.text = alienInUse == PlayerprefConst.BLUE ? "in use" : "use";
+        redBtnText.text = alienInUse == PlayerprefConst.RED ? "in use" : "use";
+        orangeBtnText.text = alienInUse == PlayerprefConst.ORANGE ? "in use" : "use";
+        
+        blueAd.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.BLUE_UNLOCKED) != 1);
+        redAd.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.RED_UNLOCKED) != 1);
+        orangeAd.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.ORANGE_UNLOCKED) != 1);
+        blueBtnText.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.BLUE_UNLOCKED) == 1);
+        redBtnText.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.RED_UNLOCKED) == 1);
+        orangeBtnText.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.ORANGE_UNLOCKED) == 1);
+    }
+
+    public void ShowAd(string type) {
+        if(type == PlayerprefConst.GREEN) {
+            PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.GREEN);
+            UpdateShop();
+            return;
+        }
+        if(type == PlayerprefConst.BLUE && PlayerPrefs.GetInt(PlayerprefConst.BLUE_UNLOCKED) == 1) {
+            PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.BLUE);
+            UpdateShop();
+            return;
+        }
+        if(type == PlayerprefConst.RED && PlayerPrefs.GetInt(PlayerprefConst.RED_UNLOCKED) == 1) {
+            PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.RED);
+            UpdateShop();
+            return;
+        }
+        if(type == PlayerprefConst.ORANGE && PlayerPrefs.GetInt(PlayerprefConst.ORANGE_UNLOCKED) == 1) {
+            PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.ORANGE);
+            UpdateShop();
+            return;
+        }
+        if(this.rewardedAd.IsLoaded()) {
+            rewardType = type;
             this.rewardedAd.Show();
         }
     }
@@ -99,6 +176,7 @@ public class MenuView : MonoBehaviour {
                 break;
             case "close":
                 CloseShopPanel();
+                Debug.Log("Alien in use is " + PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE));
                 FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLOSE);
                 break;
         }

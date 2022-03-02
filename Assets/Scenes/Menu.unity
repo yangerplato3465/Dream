@@ -390,7 +390,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NTD. 30
+  m_Text: in use
 --- !u!222 &104329420
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -900,7 +900,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 312766258}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1553930921}
+        m_TargetAssemblyTypeName: MenuView, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: orange
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &312766258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,7 +1109,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 359582387}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1553930921}
+        m_TargetAssemblyTypeName: MenuView, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: red
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &359582387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,13 +2187,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1553930921}
         m_TargetAssemblyTypeName: MenuView, Assembly-CSharp
         m_MethodName: ShowAd
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: blue
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1056791967
@@ -2280,7 +2304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NTD. 30
+  m_Text: in use
 --- !u!222 &1108227228
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2438,7 +2462,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NTD. 30
+  m_Text: in use
 --- !u!222 &1293091216
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3121,7 +3145,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1526465605}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1553930921}
+        m_TargetAssemblyTypeName: MenuView, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: green
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1526465605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3256,6 +3292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 1433218906}
   circleSwipe: {fileID: 207719119}
+  greenButton: {fileID: 1526465604}
+  blueButton: {fileID: 1056791966}
+  redButton: {fileID: 359582386}
+  orangeButton: {fileID: 312766257}
 --- !u!4 &1553930922
 Transform:
   m_ObjectHideFlags: 0

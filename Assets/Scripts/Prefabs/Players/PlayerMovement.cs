@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour {
         moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y));
+        if(moveInput.x > 0) transform.localScale = new Vector3(-1, 1, 1);
+        if(moveInput.x < 0) transform.localScale = new Vector3(1, 1, 1);
 
         moveInput.Normalize();
 

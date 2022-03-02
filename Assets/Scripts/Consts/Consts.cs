@@ -11,3 +11,16 @@ public class SceneConst {
     public static string LEVELEDITOR_SCENE = "LevelEditor";
 
 }
+
+public class PlayerprefConst {
+    public static string ALIEN_IN_USE = "alieninuse";
+    public static string GREEN = "green";
+    public static string BLUE_UNLOCKED = "blueunlocked";
+    public static string BLUE = "blue";
+    public static string RED_UNLOCKED = "redunlocked";
+    public static string RED = "red";
+    public static string ORANGE_UNLOCKED = "orangeunlocked";
+    public static string ORANGE = "orange";
+    public static string ADFREE_UNLOCKED = "adfreeunlocked";
+
+}
