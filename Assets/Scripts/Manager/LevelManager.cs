@@ -338,4 +338,8 @@ public class LevelData {
     public List<string> gems = new List<string>();
     public List<float> gems_poses_x = new List<float>();
     public List<float> gems_poses_y = new List<float>();
+
+    //gem data for level button
+    public List<string> level_name = new List<string>();
+    public List<int> gem_count = new List<int>();
 }

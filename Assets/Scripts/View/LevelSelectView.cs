@@ -18,9 +18,9 @@ public class LevelSelectView : MonoBehaviour {
         for(int i = 0; i < levelName.Length; i++) {
             GameObject btn = Instantiate(button, new Vector3(0, 0, 0), Quaternion.identity, buttonLayout);
             int levelnum = i + 1;
+            int gemNum = PlayerPrefs.GetInt("level" + levelnum);
             btn.GetComponent<Button>().onClick.AddListener(() => OnLevelButtonClick(levelnum));
-            btn.GetComponentInChildren<Text>().text = "Level " + (levelnum);
-            btn.SetActive(true);
+            btn.GetComponent<LevelButton>().init(gemNum, levelnum);
         }
     }
 

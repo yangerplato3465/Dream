@@ -8,6 +8,7 @@ public class MenuView : MonoBehaviour {
 
     public RectTransform shopPanel;
     public GameObject circleSwipe;
+    public RectTransform title;
     private RewardedAd rewardedAd;
     private string rewardType;
     
@@ -23,6 +24,7 @@ public class MenuView : MonoBehaviour {
 
     void Start() {
         LeanTween.moveLocalX(circleSwipe, -2400f, 1f).setEaseOutQuad();
+        TitleAnimation();
         CreateAndLoadAd();
         UpdateShop();
     }
@@ -180,6 +182,11 @@ public class MenuView : MonoBehaviour {
                 FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLOSE);
                 break;
         }
+    }
+
+    private void TitleAnimation() {
+        LeanTween.alpha(title, 1f, .8f);
+        LeanTween.moveX(title, 0f, 1f).setEaseOutQuad();
     }
 
     private void OpenShopPanel() {
