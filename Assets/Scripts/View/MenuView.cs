@@ -9,6 +9,15 @@ public class MenuView : MonoBehaviour {
     public RectTransform shopPanel;
     public GameObject circleSwipe;
     public RectTransform title;
+    public RectTransform sparkle;
+    public RectTransform yellowAlien;
+    public RectTransform brownAlien;
+    public RectTransform blueAlien;
+    public RectTransform greenAlien;
+    public RectTransform redAlien;
+    public GameObject startButton;
+    public GameObject sfxButton;
+    public GameObject shopButton;
     private RewardedAd rewardedAd;
     private string rewardType;
     
@@ -23,7 +32,7 @@ public class MenuView : MonoBehaviour {
     }
 
     void Start() {
-        LeanTween.moveLocalX(circleSwipe, -2400f, 1f).setEaseOutQuad();
+        LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad();
         TitleAnimation();
         CreateAndLoadAd();
         UpdateShop();
@@ -187,6 +196,18 @@ public class MenuView : MonoBehaviour {
     private void TitleAnimation() {
         LeanTween.alpha(title, 1f, .8f);
         LeanTween.moveX(title, 0f, 1f).setEaseOutQuad();
+        LeanTween.alpha(sparkle, 1f, .3f).setDelay(.3f);
+        LeanTween.scale(sparkle.gameObject, Vector3.one * 1.3f, 2f).setEasePunch();
+        LeanTween.alpha(yellowAlien, 1f, .3f).setDelay(.3f);
+        LeanTween.alpha(brownAlien, 1f, .3f).setDelay(.5f);
+        LeanTween.alpha(blueAlien, 1f, .3f).setDelay(.7f);
+        LeanTween.scale(yellowAlien.gameObject, new Vector3(-1, 1, 1) * 1.3f, 2f).setEasePunch().setDelay(.3f);
+        LeanTween.scale(brownAlien.gameObject, Vector3.one * 1.3f, 2f).setEasePunch().setDelay(.5f);
+        LeanTween.scale(blueAlien.gameObject, Vector3.one * 1.3f, 2f).setEasePunch().setDelay(.7f);
+        LeanTween.alpha(redAlien, 1f, .3f).setDelay(1f);
+        LeanTween.alpha(greenAlien, 1f, .3f).setDelay(1f);
+        LeanTween.scale(redAlien.gameObject, Vector3.one * 1.5f, 1.5f).setEasePunch().setDelay(1f);
+        LeanTween.scale(greenAlien.gameObject, new Vector3(-1, 1, 1) * 1.5f, 1.5f).setEasePunch().setDelay(1f);
     }
 
     private void OpenShopPanel() {

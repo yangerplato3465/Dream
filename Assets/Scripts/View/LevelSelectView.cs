@@ -8,11 +8,13 @@ public class LevelSelectView : MonoBehaviour {
 
     public Transform buttonLayout;
     public GameObject button;
+    public GameObject circleSwipe;
 
     private string[] levelName;
 
 
     private void Awake() {
+        LeanTween.moveX(circleSwipe, 0f, 0f);
         levelName = Directory.GetFiles(Application.dataPath + "/LevelData", "*.json");
         
         for(int i = 0; i < levelName.Length; i++) {
@@ -22,6 +24,10 @@ public class LevelSelectView : MonoBehaviour {
             btn.GetComponent<Button>().onClick.AddListener(() => OnLevelButtonClick(levelnum));
             btn.GetComponent<LevelButton>().init(gemNum, levelnum);
         }
+    }
+
+    private void Start() {
+        LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad();
     }
 
     private void OnLevelButtonClick(int num){
