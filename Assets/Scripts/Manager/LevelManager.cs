@@ -6,11 +6,13 @@ using UnityEngine.UI;
 using System.IO;
 using System;
 using Lean.Localization;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     public Camera cameras;
+    public Light2D globalLight;
     public bool isEditorMode = true;
     private void Awake() {
         //set up the instance
@@ -25,6 +27,7 @@ public class LevelManager : MonoBehaviour
     public Transform playerMirrorPos;
     public GameObject playerPrefab;
     public GameObject playerMirrorPrefab;
+    public bool isReverse = false;
 
     //tiles
     public List<CustomTile> tiles = new List<CustomTile>();
@@ -93,6 +96,7 @@ public class LevelManager : MonoBehaviour
         int level = Int32.Parse(levelNum.text);
         levelData.LevelNum = level;
         levelData.camera_size = cameras.orthographicSize;
+        levelData.global_light_intensity = globalLight.intensity;
 
         //loop trougth the bounds of the tilemap
         for (int x = bounds.min.x; x < bounds.max.x; x++) {
@@ -118,6 +122,7 @@ public class LevelManager : MonoBehaviour
         levelData.player_pos_y = playerPos.position.y;
         levelData.playerMirror_pos_x = playerMirrorPos.position.x;
         levelData.playerMirror_pos_y = playerMirrorPos.position.y;
+        levelData.playerMirror_is_reverse = isReverse;
 
         //loop through key container and save data
         foreach (Transform key in keyContainer) {
@@ -258,7 +263,8 @@ public class LevelManager : MonoBehaviour
         }
 
         Instantiate(playerPrefab, new Vector3(data.player_pos_x, data.player_pos_y, 0), Quaternion.identity, playerPos);
-        Instantiate(playerMirrorPrefab, new Vector3(data.playerMirror_pos_x, data.playerMirror_pos_y, 0), Quaternion.identity, playerMirrorPos);
+        GameObject playerMirror = Instantiate(playerMirrorPrefab, new Vector3(data.playerMirror_pos_x, data.playerMirror_pos_y, 0), Quaternion.identity, playerMirrorPos);
+        playerMirror.GetComponent<PlayerMirrorMovement>().isReverse = data.playerMirror_is_reverse;
 
         //debug
         Debug.Log("Level " + level + " was loaded");
@@ -280,6 +286,7 @@ public class LevelManager : MonoBehaviour
 public class LevelData {
     public int LevelNum;
     public float camera_size;
+    public float global_light_intensity;
     //tiles data
     public List<string> tiles = new List<string>();
     public List<int> poses_x = new List<int>();
@@ -290,6 +297,7 @@ public class LevelData {
     public float player_pos_y;
     public float playerMirror_pos_x;
     public float playerMirror_pos_y;
+    public bool playerMirror_is_reverse;
 
     //keys data
     public List<string> keys = new List<string>();

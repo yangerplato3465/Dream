@@ -1,6 +1,7 @@
 {
     "LevelNum": 1,
     "camera_size": 5.0,
+    "global_light_intensity": 0.6000000238418579,
     "tiles": [
         "Sand",
         "Sand",
@@ -653,6 +654,7 @@
     "player_pos_y": 2.5,
     "playerMirror_pos_x": 4.5,
     "playerMirror_pos_y": -1.5,
+    "playerMirror_is_reverse": true,
     "keys": [],
     "keys_poses_x": [],
     "keys_poses_y": [],
@@ -695,8 +697,10 @@
         0.0
     ],
     "gems_poses_y": [
-        1.9014841318130494,
-        2.5968451499938967,
-        0.5649734735488892
-    ]
+        2.0809051990509035,
+        2.4952523708343508,
+        0.5955701470375061
+    ],
+    "level_name": [],
+    "gem_count": []
 }

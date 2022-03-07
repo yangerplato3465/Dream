@@ -7,6 +7,7 @@ public class PlayerMirrorMovement : MonoBehaviour {
     public float moveSpeed;
     public Animator animator;
     public Rigidbody2D body;
+    public bool isReverse = false;
     public RuntimeAnimatorController green;
     public RuntimeAnimatorController blue;
     public RuntimeAnimatorController red;
@@ -27,12 +28,13 @@ public class PlayerMirrorMovement : MonoBehaviour {
         moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y));
-        if(moveInput.x > 0) transform.localScale = new Vector3(-1, 1, 1);
-        if(moveInput.x < 0) transform.localScale = new Vector3(1, 1, 1);
 
         moveInput.Normalize();
 
-        body.velocity = moveInput * moveSpeed;
+        if(!isReverse) body.velocity = moveInput * moveSpeed;
+        else body.velocity = -moveInput * moveSpeed;
+        if(body.velocity.x > 0) transform.localScale = new Vector3(-1, 1, 1);
+        if(body.velocity.x < 0) transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void SetSkin() {
