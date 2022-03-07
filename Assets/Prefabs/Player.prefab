@@ -144,6 +144,10 @@ MonoBehaviour:
   moveSpeed: 10
   animator: {fileID: 6600901385818356934}
   body: {fileID: 6600901385818356931}
+  green: {fileID: 9100000, guid: 5067faf864d9c184e8b02fb3a3e51608, type: 2}
+  blue: {fileID: 9100000, guid: 725b8a3d383d047bd9b7f866f5e6b49f, type: 2}
+  red: {fileID: 9100000, guid: e39bdba4cc54d47d19e814a69674bfee, type: 2}
+  orange: {fileID: 9100000, guid: 0411c41391f734b88967f5032a3d8335, type: 2}
 --- !u!212 &6600901385818356929
 SpriteRenderer:
   m_ObjectHideFlags: 0

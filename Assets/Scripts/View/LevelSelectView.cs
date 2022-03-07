@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelectView : MonoBehaviour {
@@ -30,7 +31,13 @@ public class LevelSelectView : MonoBehaviour {
         LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad();
     }
 
+    public void BackHome() {
+        LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
+            SceneManager.LoadScene(SceneConst.MENU_SCENE);
+        });
+    }
+
     private void OnLevelButtonClick(int num){
-        Debug.Log("Clicked Level " + num);
+        SceneManager.LoadScene(SceneConst.LEVELEDITOR_SCENE);
     }
 }
