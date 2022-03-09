@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using GoogleMobileAds.Api;
+using UnityEngine.SceneManagement;
 using System;
 
 public class GameManager : MonoBehaviour {
     private int currentLevel = 0;
+    public GameObject circleSwipe;
     public RectTransform fade;
     public RectTransform redFade;
     public float fadeTime = 1f;
@@ -25,9 +27,12 @@ public class GameManager : MonoBehaviour {
     public ParticleSystem particle2;
     public ParticleSystem particle3;
 
-
-    void Start() {
+    private void Awake() {
+        LeanTween.moveX(circleSwipe, 0f, 0f);
         AddListener();
+    }
+    void Start() {
+        LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad();
         MobileAds.Initialize(initStatus => { 
             Debug.Log("admob initialized: ");
             RequestInterstitial();
@@ -39,12 +44,25 @@ public class GameManager : MonoBehaviour {
         LeanTween.scale(restartButton, Vector3.one * 1.2f, 1).setEasePunch();
     }
 
+    public void onMenuButtonClick() {
+        LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
+            SceneManager.LoadScene(SceneConst.MENU_SCENE);
+        });
+    }
+
     private void setCurrentLevel(object level) {
+        Debug.Log("setCurrentLevel" + (int)level);
         currentLevel = (int)level;
     }
 
     private void onGameWin(object sender) {
         showLevelEndPanel();
+        if(gemCount > PlayerPrefs.GetInt("level" + currentLevel)) {
+            PlayerPrefs.SetInt("level" + currentLevel, gemCount);
+        }
+        if(currentLevel >= PlayerPrefs.GetInt(PlayerprefConst.CURRENT_AVAIL_LEVEL)){
+            PlayerPrefs.SetInt(PlayerprefConst.CURRENT_AVAIL_LEVEL, currentLevel + 1);
+        }
         Debug.Log("Game win");
     }
 
@@ -85,12 +103,12 @@ public class GameManager : MonoBehaviour {
         });
     }
 
-    private void fadeinBlack() {
+    public void fadeinBlack() {
         LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
     }
 
     private void fadeoutBlack() {
-        loadLevel();
+        loadNextLevel();
         LeanTween.alpha(fade, 0f, fadeTime).setEase(fadeEaseType);
     }
 
@@ -111,8 +129,16 @@ public class GameManager : MonoBehaviour {
         EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel);
     }
 
-    private void loadLevel() {
+    private void loadNextLevel() {
+        Debug.Log("currentLevel" + currentLevel);
+
         EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel + 1);
+        Debug.Log("load level" + (currentLevel + 1));
+        levelEndPanel.gameObject.SetActive(false);
+        gemCount = 0;
+        gem1.SetActive(false);
+        gem2.SetActive(false);
+        gem3.SetActive(false);
     }
 
     private void RequestInterstitial() {

@@ -59,6 +59,10 @@ public class EventManager
     /// <param name="eventName"></param>  
     public static void TriggerEvent(string eventName, object sender = null)
     {
+        // callbackList.ForEach((item) => {
+        //     Debug.Log("callbackList " + item.ArgName);
+        // });
+        // Debug.Log("Trigger Event: " + eventName);
         EventArg eventarg = callbackList.Find(a => a.ArgName == eventName); ;
         if (eventarg == null)
         {

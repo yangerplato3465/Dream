@@ -654,7 +654,7 @@
     "player_pos_y": 2.5,
     "playerMirror_pos_x": 4.5,
     "playerMirror_pos_y": -1.5,
-    "playerMirror_is_reverse": true,
+    "playerMirror_is_reverse": false,
     "keys": [],
     "keys_poses_x": [],
     "keys_poses_y": [],
@@ -692,14 +692,14 @@
         "Gem (2)"
     ],
     "gems_poses_x": [
-        0.5,
-        -2.0,
-        0.0
+        0.0,
+        4.5,
+        4.5
     ],
     "gems_poses_y": [
-        2.0809051990509035,
-        2.4952523708343508,
-        0.5955701470375061
+        0.4631180465221405,
+        3.099890947341919,
+        1.5817735195159913
     ],
     "level_name": [],
     "gem_count": []

@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public Camera cameras;
     public Light2D globalLight;
     public bool isEditorMode = true;
+    public GameObject editorButtons;
     private void Awake() {
         //set up the instance
         if (instance == null) instance = this;
@@ -63,6 +64,10 @@ public class LevelManager : MonoBehaviour
 
     private void Start() {
         EventManager.AddListener(SystemEvents.LOAD_LEVEL, onLoadLevel);
+        editorButtons.SetActive(isEditorMode);
+        if(!isEditorMode) {
+            LoadLevel(Config.CURRENT_LEVEL);
+        }
     }
 
     private void Update() {
@@ -197,6 +202,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(int level) {
         // set current level to game manager
+        Debug.Log("in LoadLevel level  = " + level);
         EventManager.TriggerEvent(SystemEvents.SET_LEVEL, level);
         //load the json file to a leveldata
         string json = File.ReadAllText(Application.dataPath + "/LevelData/Level" + level + ".json");
@@ -275,6 +281,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void onLoadLevel(object sender) {
+        Debug.Log("load level========" + (int)sender);
         LoadLevel((int)sender);
     }
 
