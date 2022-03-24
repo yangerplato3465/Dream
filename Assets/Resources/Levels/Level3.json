@@ -1,5 +1,5 @@
 {
-    "LevelNum": 1,
+    "LevelNum": 3,
     "camera_size": 5.0,
     "global_light_intensity": 0.6000000238418579,
     "tiles": [
@@ -650,9 +650,9 @@
         4,
         5
     ],
-    "player_pos_x": -4.5,
+    "player_pos_x": 0.5,
     "player_pos_y": 2.5,
-    "playerMirror_pos_x": 4.5,
+    "playerMirror_pos_x": 0.5,
     "playerMirror_pos_y": -1.5,
     "playerMirror_is_reverse": false,
     "keys": [],
@@ -692,14 +692,14 @@
         "Gem (2)"
     ],
     "gems_poses_x": [
-        0.0,
-        4.5,
-        4.5
+        4.0,
+        -3.5,
+        2.5
     ],
     "gems_poses_y": [
-        0.4631180465221405,
-        3.099890947341919,
-        1.5817735195159913
+        -1.9376436471939088,
+        3.0660688877105715,
+        2.9200005531311037
     ],
     "level_name": [],
     "gem_count": []

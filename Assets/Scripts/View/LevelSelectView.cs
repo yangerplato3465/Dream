@@ -16,11 +16,12 @@ public class LevelSelectView : MonoBehaviour {
 
     private void Awake() {
         LeanTween.moveX(circleSwipe, 0f, 0f);
-        levelName = Directory.GetFiles(Application.dataPath + "/LevelData", "*.json");
+        // levelName = Directory.GetFiles( Application.dataPath, "*.json");
+        Object[] maps = Resources.LoadAll("Levels");
         if(PlayerPrefs.GetInt(PlayerprefConst.CURRENT_AVAIL_LEVEL) == 0) PlayerPrefs.SetInt(PlayerprefConst.CURRENT_AVAIL_LEVEL, 1);
         int currentAvailableLevel = PlayerPrefs.GetInt(PlayerprefConst.CURRENT_AVAIL_LEVEL);
         
-        for(int i = 0; i < levelName.Length; i++) {
+        for(int i = 0; i < maps.Length; i++) {
             GameObject btn = Instantiate(button, new Vector3(0, 0, 0), Quaternion.identity, buttonLayout);
             int levelnum = i + 1;
             int gemNum = PlayerPrefs.GetInt("level" + levelnum);

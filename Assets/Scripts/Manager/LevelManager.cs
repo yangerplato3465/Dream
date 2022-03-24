@@ -194,8 +194,7 @@ public class LevelManager : MonoBehaviour
 
         //save the data as a json
         string json = JsonUtility.ToJson(levelData, true);
-        File.WriteAllText(Application.dataPath + "/LevelData/Level" + level + ".json", json);
-
+        File.WriteAllText(Application.dataPath + "/Resources/Levels/Level" + level + ".json", json);
         //debug
         Debug.Log("Level was saved to Level" + level + ".json");
     }
@@ -205,8 +204,12 @@ public class LevelManager : MonoBehaviour
         Debug.Log("in LoadLevel level  = " + level);
         EventManager.TriggerEvent(SystemEvents.SET_LEVEL, level);
         //load the json file to a leveldata
-        string json = File.ReadAllText(Application.dataPath + "/LevelData/Level" + level + ".json");
-        LevelData data = JsonUtility.FromJson<LevelData>(json);
+        // string json = File.ReadAllText(Application.persistentDataPath + "/Level" + level + ".json");
+        // var jsonTextFile = Resources.Load("Levels/Level" + level + ".json");
+        UnityEngine.Object[] maps = Resources.LoadAll("Levels");
+        string jsonTextFile = maps[level - 1].ToString();
+        Debug.Log("jsonTextFile:" + jsonTextFile);
+        LevelData data = JsonUtility.FromJson<LevelData>(jsonTextFile.ToString());
 
         //clear the tilemap
         tilemap.ClearAllTiles();

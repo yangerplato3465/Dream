@@ -39,13 +39,13 @@ public class MenuView : MonoBehaviour {
     }
 
     private void CreateAndLoadAd() {
-        #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/5224354917";
-        #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
-        #else
-            string adUnitId = "unexpected_platform";
-        #endif
+        // #if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        // #elif UNITY_IPHONE
+        //     string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+        // #else
+        //     string adUnitId = "unexpected_platform";
+        // #endif
         rewardedAd = new RewardedAd(adUnitId);
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
@@ -71,7 +71,7 @@ public class MenuView : MonoBehaviour {
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
-        Debug.Log("HandleRewardedAdFailedToLoad" + args.GetHashCode());
+        Debug.LogWarning("HandleRewardedAdFailedToLoad" + args.GetHashCode());
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args) {
@@ -79,7 +79,7 @@ public class MenuView : MonoBehaviour {
     }
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args) {
-        Debug.Log("HandleRewardedAdFailedToShow event received with message: " + args.GetHashCode());
+        Debug.LogWarning("HandleRewardedAdFailedToShow event received with message: " + args.GetHashCode());
     }
 
     public void HandleRewardedAdClosed(object sender, EventArgs args) {

@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour {
     public LeanTweenType fadeEaseType = LeanTweenType.easeInOutQuart;
     public GameObject restartButton;
     private int gemCount = 0;
+    private float timeElasped = 0;
+    private bool timeToShowAd = false;
 
     //Admobstuff
     private InterstitialAd interstitial;
 
     [Header("Level end panel")]
     public RectTransform levelEndPanel;
+    public RectTransform gameEndPanel;
     public RectTransform levelText;
     public RectTransform completeText;
     public GameObject gem1;
@@ -37,6 +40,11 @@ public class GameManager : MonoBehaviour {
             Debug.Log("admob initialized: ");
             RequestInterstitial();
         });
+    }
+
+    private void Update() {
+        if(timeElasped < Config.TIME_TO_SHOW_AD) timeElasped += Time.deltaTime;
+        else timeToShowAd = true;
     }
 
     public void onRestartButtonClick() {
@@ -87,6 +95,19 @@ public class GameManager : MonoBehaviour {
         });
     }
 
+    private void closeLevelEndPanel() {
+        LeanTween.scale(levelEndPanel.gameObject, Vector3.one * .6f, .3f).setEaseInBack().setOnComplete(() => {
+            levelEndPanel.gameObject.SetActive(false);
+            LeanTween.scale(levelEndPanel.gameObject, Vector3.one * 1f, 0);
+            showGameEndPanel();
+        });
+    }
+
+    public void showGameEndPanel() {
+        gameEndPanel.gameObject.SetActive(true);
+        LeanTween.scale(gameEndPanel.gameObject, Vector3.one * 1.1f, .6f).setEaseShake();
+    }
+
     private void showGemAnimation() {
         if(gemCount == 0) return;
         gem1.SetActive(true);
@@ -103,7 +124,15 @@ public class GameManager : MonoBehaviour {
         });
     }
 
-    public void fadeinBlack() {
+    public void fadeinBlack() { //click event for next level button
+        if(currentLevel >= Config.LEVEL_COUNT) {
+            closeLevelEndPanel();
+            return;
+        }
+        if(timeToShowAd) {
+            ShowAd();
+            return;
+        }
         LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
     }
 
@@ -183,6 +212,10 @@ public class GameManager : MonoBehaviour {
 
     public void HandleOnAdClosed(object sender, EventArgs args) {
         Debug.Log("HandleAdClosed event received");
+        LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
+        RequestInterstitial();
+        timeElasped = 0f;
+        timeToShowAd = false;
     }
 
     public void HandleOnAdLeavingApplication(object sender, EventArgs args) {
@@ -194,6 +227,8 @@ public class GameManager : MonoBehaviour {
             this.interstitial.Show();
         } else {
             Debug.LogError("Ad failed to load");
+            //continue gameplay if failed to load ad
+            LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
         }
     }
 
