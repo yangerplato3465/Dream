@@ -1,11 +1,13 @@
 using UnityEngine.Audio;
-using System;
+using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AudioManager : MonoBehaviour {
 
     public Sound[] sounds;
     public static AudioManager instance;
+    private List<string> themeArray = new List<string>();
 
     void Awake() {
         if(instance == null) {
@@ -25,7 +27,28 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    private void Start() {
+        PlayRandomSong();
+    }
+
+    private void Update() {
+        Sound sound = Array.Find(sounds, sound => sound.source.isPlaying);
+        if (sound == null) PlayRandomSong();
+    }
+
+    public void PlayRandomSong() {
+        if(themeArray.Count == 0) {
+            for (int i = 0; i < 5; i++){  
+                themeArray.Add("theme"+(i+1));
+            }
+        }
+        int songIndex = UnityEngine.Random.Range(1, themeArray.Count + 1);
+        Play(themeArray[songIndex]);
+        themeArray.RemoveAt(songIndex);
+    }
+
     public void Play(string name) {
+        Debug.Log("Now playing " + name);
         Sound sound = Array.Find(sounds, sound => sound.name == name);
         if(sound == null) {
             Debug.LogWarning("Did not found sound file: " + name);
