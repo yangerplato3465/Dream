@@ -20,6 +20,7 @@ public class MenuView : MonoBehaviour {
     public GameObject shopButton;
     private RewardedAd rewardedAd;
     private string rewardType;
+    private Boolean giveReward = false;
     
     [Header("Shop Buttons")]
     public Button greenButton;
@@ -36,6 +37,13 @@ public class MenuView : MonoBehaviour {
         TitleAnimation();
         CreateAndLoadAd();
         UpdateShop();
+    }
+
+    private void Update() {
+        if(giveReward && rewardType != null) {
+            UnlockAliens(rewardType);
+            giveReward = false;
+        }
     }
 
     private void CreateAndLoadAd() {
@@ -96,7 +104,7 @@ public class MenuView : MonoBehaviour {
             Debug.LogWarning("Something went wrong while giving reward");
             return;
         }
-        UnlockAliens(rewardType);
+        giveReward = true;
     }
 
     private void UnlockAliens(string type){
@@ -177,7 +185,6 @@ public class MenuView : MonoBehaviour {
                 break;
             case "shop":
                 OpenShopPanel();
-                FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
                 break;
             case "twitter":
                 Application.OpenURL(Config.TWITTER_URL);
@@ -188,7 +195,6 @@ public class MenuView : MonoBehaviour {
             case "close":
                 CloseShopPanel();
                 Debug.Log("Alien in use is " + PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE));
-                FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLOSE);
                 break;
         }
     }
@@ -206,16 +212,18 @@ public class MenuView : MonoBehaviour {
         LeanTween.scale(blueAlien.gameObject, Vector3.one * 1.3f, 2f).setEasePunch().setDelay(.7f);
         LeanTween.alpha(redAlien, 1f, .3f).setDelay(1f);
         LeanTween.alpha(greenAlien, 1f, .3f).setDelay(1f);
-        LeanTween.scale(redAlien.gameObject, Vector3.one * 1.5f, 1.5f).setEasePunch().setDelay(1f);
-        LeanTween.scale(greenAlien.gameObject, new Vector3(-1, 1, 1) * 1.5f, 1.5f).setEasePunch().setDelay(1f);
+        LeanTween.scale(redAlien.gameObject, Vector3.one * 1.2f, 1.5f).setEasePunch().setDelay(1f);
+        LeanTween.scale(greenAlien.gameObject, new Vector3(-1, 1, 1) * 1.2f, 1.5f).setEasePunch().setDelay(1f);
     }
 
     private void OpenShopPanel() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         shopPanel.gameObject.SetActive(true);
         LeanTween.scale(shopPanel.gameObject, Vector3.one * 1.1f, .8f).setEasePunch();
     }
 
     private void CloseShopPanel() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLOSE);
         LeanTween.scale(shopPanel.gameObject, Vector3.one * .6f, .3f).setEaseInBack().setOnComplete(() => {
             shopPanel.gameObject.SetActive(false);
             LeanTween.scale(shopPanel.gameObject, Vector3.one * 1f, 0);

@@ -61,4 +61,20 @@ public class AudioManager : MonoBehaviour {
             instance.Unmute(SoundConst.BUTTON_CLOSE);
         }
     }
+
+    public static void ToggleMusic(bool disable) {
+        if(disable){
+            instance.Mute(SoundConst.THEME1);
+            instance.Mute(SoundConst.THEME2);
+            instance.Mute(SoundConst.THEME3);
+            instance.Mute(SoundConst.THEME4);
+            instance.Mute(SoundConst.THEME5);
+        } else {
+            instance.Unmute(SoundConst.THEME1);
+            instance.Unmute(SoundConst.THEME2);
+            instance.Unmute(SoundConst.THEME3);
+            instance.Unmute(SoundConst.THEME4);
+            instance.Unmute(SoundConst.THEME5);
+        }
+    }
 }
