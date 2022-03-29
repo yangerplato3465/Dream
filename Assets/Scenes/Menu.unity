@@ -5361,18 +5361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: buttonclick
-    clip: {fileID: 8300000, guid: 0c4f96de710c44e158f77ad7bd058df0, type: 3}
-    loop: 0
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
-  - name: buttonclose
-    clip: {fileID: 8300000, guid: 3cc26cc1c35f24d739c6436e9803530b, type: 3}
-    loop: 0
-    volume: 1
-    pitch: 1
-    source: {fileID: 0}
   - name: theme1
     clip: {fileID: 8300000, guid: 5e0e2d64ff0af2a4c8fba8b3f5d17007, type: 3}
     loop: 0
@@ -5399,6 +5387,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: theme5
     clip: {fileID: 8300000, guid: fdf5c196ba068364693183956d9dfa30, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: buttonclose
+    clip: {fileID: 8300000, guid: 3cc26cc1c35f24d739c6436e9803530b, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: buttonclick
+    clip: {fileID: 8300000, guid: 0c4f96de710c44e158f77ad7bd058df0, type: 3}
     loop: 0
     volume: 1
     pitch: 1
