@@ -18,6 +18,8 @@ public class MenuView : MonoBehaviour {
     public GameObject startButton;
     public GameObject sfxButton;
     public GameObject shopButton;
+    public Image soundToggle;
+    public Image musicToggle;
     private RewardedAd rewardedAd;
     private string rewardType;
     private Boolean giveReward = false;
@@ -84,6 +86,7 @@ public class MenuView : MonoBehaviour {
 
     public void HandleRewardedAdOpening(object sender, EventArgs args) {
         Debug.Log("HandleRewardedAdOpening event received");
+        AudioManager.ToggleMusic(true);
     }
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args) {
@@ -92,7 +95,7 @@ public class MenuView : MonoBehaviour {
 
     public void HandleRewardedAdClosed(object sender, EventArgs args) {
         Debug.Log("HandleRewardedAdClosed event received");
-        
+        AudioManager.ToggleMusic(false);
         CreateAndLoadAd();
     }
 
@@ -151,6 +154,7 @@ public class MenuView : MonoBehaviour {
     }
 
     public void ShowAd(string type) {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         if(type == PlayerprefConst.GREEN) {
             PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.GREEN);
             UpdateShop();
@@ -231,11 +235,25 @@ public class MenuView : MonoBehaviour {
     }
 
     public void OnToggleSound(Toggle disable) {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         AudioManager.ToggleAllSFX(disable.isOn);
+        var tempColor = soundToggle.color;
+        tempColor.a = disable.isOn ? 0f : 1f;
+        soundToggle.color = tempColor;
         Debug.Log("Sound disable is " + disable.isOn);
     }
 
+    public void OnToggleMusic(Toggle disable) {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
+        AudioManager.ToggleMusic(disable.isOn);
+        var tempColor = musicToggle.color;
+        tempColor.a = disable.isOn ? 0f : 1f;
+        musicToggle.color = tempColor;
+        Debug.Log("Music disable is " + disable.isOn);
+    }
+
     private void GoToLevelSelectScene() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
             SceneManager.LoadScene(SceneConst.LEVELSELECT_SCENE);
         });

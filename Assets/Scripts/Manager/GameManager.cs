@@ -208,11 +208,13 @@ public class GameManager : MonoBehaviour {
 
     public void HandleOnAdOpened(object sender, EventArgs args) {
         Debug.Log("HandleAdOpened event received");
+        AudioManager.ToggleMusic(true);
     }
 
     public void HandleOnAdClosed(object sender, EventArgs args) {
         Debug.Log("HandleAdClosed event received");
         LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
+        AudioManager.ToggleMusic(false);
         RequestInterstitial();
         timeElasped = 0f;
         timeToShowAd = false;

@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour {
                 themeArray.Add("theme"+(i+1));
             }
         }
-        int songIndex = UnityEngine.Random.Range(1, themeArray.Count + 1);
+        int songIndex = UnityEngine.Random.Range(0, themeArray.Count);
         Play(themeArray[songIndex]);
         themeArray.RemoveAt(songIndex);
     }
@@ -72,7 +72,7 @@ public class AudioManager : MonoBehaviour {
             Debug.LogWarning("Did not found sound file: " + name);
             return;
         }
-        sound.source.volume = 1f;
+        sound.source.volume = .3f;
     }
 
     public static void ToggleAllSFX(bool disable) {
