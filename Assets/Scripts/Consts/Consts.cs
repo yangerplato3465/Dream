@@ -6,6 +6,7 @@ public class SoundConst {
     public static string THEME5 = "theme5";
     public static string BUTTON_CLICK = "buttonclick";
     public static string BUTTON_CLOSE = "buttonclose";
+    public static string FOOTSTEP = "footstep";
 
 }
 

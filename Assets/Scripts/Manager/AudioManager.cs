@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour {
     public Sound[] sounds;
     public static AudioManager instance;
     private List<string> themeArray = new List<string>();
+    private bool isFocused = true;
 
     void Awake() {
         if(instance == null) {
@@ -32,8 +33,11 @@ public class AudioManager : MonoBehaviour {
     }
 
     private void Update() {
+        if(!isFocused) return;
         Sound sound = Array.Find(sounds, sound => sound.source.isPlaying);
-        if (sound == null) PlayRandomSong();
+        if (sound == null) {
+            PlayRandomSong();
+        }
     }
 
     public void PlayRandomSong() {
@@ -48,7 +52,6 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void Play(string name) {
-        Debug.Log("Now playing " + name);
         Sound sound = Array.Find(sounds, sound => sound.name == name);
         if(sound == null) {
             Debug.LogWarning("Did not found sound file: " + name);
@@ -99,5 +102,9 @@ public class AudioManager : MonoBehaviour {
             instance.Unmute(SoundConst.THEME4);
             instance.Unmute(SoundConst.THEME5);
         }
+    }
+
+    private void OnApplicationFocus(bool focusStatus) {
+        isFocused = focusStatus;
     }
 }

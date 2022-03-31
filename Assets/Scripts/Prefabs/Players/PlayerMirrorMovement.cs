@@ -63,6 +63,10 @@ public class PlayerMirrorMovement : MonoBehaviour {
         }
     }
 
+    private void footstep(){
+        FindObjectOfType<AudioManager>().Play(SoundConst.FOOTSTEP);
+    }
+
     private void destroySelf(object sender){
         Destroy(gameObject);
     }

@@ -65,6 +65,10 @@ public class PlayerMovement : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    private void footstep(){
+        FindObjectOfType<AudioManager>().Play(SoundConst.FOOTSTEP);
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
         switch (other.transform.tag)
         {
