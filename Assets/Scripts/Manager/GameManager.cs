@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour {
     public GameObject gem1;
     public GameObject gem2;
     public GameObject gem3;
+    public GameObject homeButton;
+    public GameObject nextLevelButton;
     public ParticleSystem particle1;
     public ParticleSystem particle2;
     public ParticleSystem particle3;
@@ -109,7 +111,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void showGemAnimation() {
-        if(gemCount == 0) return;
+        if(gemCount == 0) {
+            showLevelEndButtons();
+            return;
+        }
         gem1.SetActive(true);
         LeanTween.scale(gem1, Vector3.one * 1.5f, .6f).setEasePunch().setOnComplete(() => {
             if(gemCount > 1) {
@@ -118,10 +123,21 @@ public class GameManager : MonoBehaviour {
                     if(gemCount > 2) {
                         gem3.SetActive(true);
                         LeanTween.scale(gem3, Vector3.one * 1.5f, .6f).setEasePunch();
+                    } else {
+                        showLevelEndButtons();
                     }
                 });
+            } else {
+                showLevelEndButtons();
             }
         });
+    }
+
+    private void showLevelEndButtons() {
+        homeButton.SetActive(true);
+        nextLevelButton.SetActive(true);
+        LeanTween.scale(homeButton, Vector3.one * 1.2f, .6f).setEasePunch();
+        LeanTween.scale(nextLevelButton, Vector3.one * 1.2f, .6f).setEasePunch();
     }
 
     public void fadeinBlack() { //click event for next level button

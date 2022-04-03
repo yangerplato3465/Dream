@@ -3796,7 +3796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &573296298
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37686,6 +37686,8 @@ MonoBehaviour:
   gem1: {fileID: 1013860080}
   gem2: {fileID: 1305572376}
   gem3: {fileID: 1912786348}
+  homeButton: {fileID: 573296297}
+  nextLevelButton: {fileID: 1790263657}
   particle1: {fileID: 1645035389}
   particle2: {fileID: 1366484758}
   particle3: {fileID: 1010349227}
@@ -38006,7 +38008,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1790263658
 RectTransform:
   m_ObjectHideFlags: 0
