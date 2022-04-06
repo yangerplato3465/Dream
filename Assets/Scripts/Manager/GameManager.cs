@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
     //Admobstuff
     private InterstitialAd interstitial;
+    private bool isAdFree = false;
 
     [Header("Level end panel")]
     public RectTransform levelEndPanel;
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour {
     }
     void Start() {
         LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad();
+        isAdFree = PlayerPrefs.GetInt(PlayerprefConst.ADFREE_UNLOCKED) == 1;
+        if(isAdFree) return;
         MobileAds.Initialize(initStatus => { 
             Debug.Log("admob initialized: ");
             RequestInterstitial();
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
+        if(isAdFree) return;
         if(timeElasped < Config.TIME_TO_SHOW_AD) timeElasped += Time.deltaTime;
         else timeToShowAd = true;
     }

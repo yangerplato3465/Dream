@@ -7,6 +7,7 @@ using System;
 public class MenuView : MonoBehaviour {
 
     public RectTransform shopPanel;
+    public RectTransform alertPanel;
     public GameObject circleSwipe;
     public RectTransform title;
     public RectTransform sparkle;
@@ -29,6 +30,8 @@ public class MenuView : MonoBehaviour {
     public Button blueButton;
     public Button redButton;
     public Button orangeButton;
+    public GameObject iapButton1;
+    public GameObject iapButton2;
 
     private void Awake() {
         LeanTween.moveX(circleSwipe, 0f, 0f);
@@ -131,6 +134,9 @@ public class MenuView : MonoBehaviour {
         if(PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE) == "") {
             PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.GREEN);
         }
+        iapButton1.SetActive(PlayerPrefs.GetInt(PlayerprefConst.ADFREE_UNLOCKED) != 1);
+        iapButton2.SetActive(PlayerPrefs.GetInt(PlayerprefConst.ADFREE_UNLOCKED) != 1);
+
         string alienInUse = PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE);
         Text greenBtnText = greenButton.transform.GetChild(0).GetComponent<Text>();
         Text blueBtnText = blueButton.transform.GetChild(0).GetComponent<Text>();
@@ -200,6 +206,9 @@ public class MenuView : MonoBehaviour {
                 CloseShopPanel();
                 Debug.Log("Alien in use is " + PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE));
                 break;
+            case "closealert":
+                CloseAlertPanel();
+                break;
         }
     }
 
@@ -234,6 +243,20 @@ public class MenuView : MonoBehaviour {
         });
     }
 
+    private void OpenAlertPanel() {
+        alertPanel.gameObject.SetActive(true);
+        LeanTween.scale(alertPanel.gameObject, Vector3.one * 1.1f, .8f).setEasePunch();
+    }
+
+    private void CloseAlertPanel() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLOSE);
+        LeanTween.scale(alertPanel.gameObject, Vector3.one * .6f, .3f).setEaseInBack().setOnComplete(() => {
+            alertPanel.gameObject.SetActive(false);
+            LeanTween.scale(alertPanel.gameObject, Vector3.one * 1f, 0);
+        });
+        UpdateShop();
+    }
+
     public void OnToggleSound(Toggle disable) {
         FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         AudioManager.ToggleAllSFX(disable.isOn);
@@ -250,6 +273,18 @@ public class MenuView : MonoBehaviour {
         tempColor.a = disable.isOn ? 0f : 1f;
         musicToggle.color = tempColor;
         Debug.Log("Music disable is " + disable.isOn);
+    }
+
+    public void OnPurchaseSuccess() {
+        PlayerPrefs.SetInt(PlayerprefConst.BLUE_UNLOCKED, 1);
+        PlayerPrefs.SetInt(PlayerprefConst.RED_UNLOCKED, 1);
+        PlayerPrefs.SetInt(PlayerprefConst.ORANGE_UNLOCKED, 1);
+        PlayerPrefs.SetInt(PlayerprefConst.ADFREE_UNLOCKED, 1);
+        OpenAlertPanel();
+    }
+
+    public void OnPurchaseFailed() {
+        Debug.Log("Something went wrong");
     }
 
     private void GoToLevelSelectScene() {

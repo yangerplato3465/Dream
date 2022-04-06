@@ -28,5 +28,5 @@ public class PlayerprefConst {
     public static string ORANGE_UNLOCKED = "orangeunlocked";
     public static string ORANGE = "orange";
     public static string ADFREE_UNLOCKED = "adfreeunlocked";
-    public static string CURRENT_AVAIL_LEVEL= "currentAvailableLevel";
+    public static string CURRENT_AVAIL_LEVEL = "currentAvailableLevel";
 }
