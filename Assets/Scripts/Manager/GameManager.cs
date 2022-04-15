@@ -54,11 +54,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void onRestartButtonClick() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         fadeinRed();
         LeanTween.scale(restartButton, Vector3.one * 1.2f, 1).setEasePunch();
     }
 
     public void onMenuButtonClick() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
             SceneManager.LoadScene(SceneConst.MENU_SCENE);
         });
@@ -87,16 +89,21 @@ public class GameManager : MonoBehaviour {
 
     private void onCollectGem(object sender) {
         gemCount += 1;
+        if(gemCount == 1) FindObjectOfType<AudioManager>().Play(SoundConst.COLLECT_GEM1);
+        if(gemCount == 2) FindObjectOfType<AudioManager>().Play(SoundConst.COLLECT_GEM2);
+        if(gemCount == 3) FindObjectOfType<AudioManager>().Play(SoundConst.COLLECT_GEM3);
+
     }
 
     public void showLevelEndPanel() {
         levelEndPanel.gameObject.SetActive(true);
+        FindObjectOfType<AudioManager>().Play(SoundConst.APPLAUSE);
         LeanTween.scale(levelEndPanel.gameObject, Vector3.one * 1.1f, .6f).setEaseShake().setOnComplete(() => {
             particle1.Play();
-            LeanTween.scale(levelText.gameObject, Vector3.one * 1.5f, .6f).setEasePunch().setOnComplete(() => {
+            LeanTween.scale(levelText.gameObject, Vector3.one * 1.5f, .3f).setEasePunch().setOnComplete(() => {
                 particle2.Play();
                 particle3.Play();
-                LeanTween.scale(completeText.gameObject, Vector3.one * 1.2f, .6f).setEasePunch().setOnComplete(showGemAnimation);
+                LeanTween.scale(completeText.gameObject, Vector3.one * 1.2f, .3f).setEasePunch().setOnComplete(showGemAnimation);
             });
         });
     }
@@ -120,20 +127,16 @@ public class GameManager : MonoBehaviour {
             return;
         }
         gem1.SetActive(true);
-        LeanTween.scale(gem1, Vector3.one * 1.5f, .6f).setEasePunch().setOnComplete(() => {
+        LeanTween.scale(gem1, Vector3.one * 1.5f, .3f).setEasePunch().setOnComplete(() => {
             if(gemCount > 1) {
                 gem2.SetActive(true);
-                LeanTween.scale(gem2, Vector3.one * 1.5f, .6f).setEasePunch().setOnComplete(() => {
+                LeanTween.scale(gem2, Vector3.one * 1.5f, .3f).setEasePunch().setOnComplete(() => {
                     if(gemCount > 2) {
                         gem3.SetActive(true);
-                        LeanTween.scale(gem3, Vector3.one * 1.5f, .6f).setEasePunch();
-                    } else {
-                        showLevelEndButtons();
-                    }
+                        LeanTween.scale(gem3, Vector3.one * 1.5f, .3f).setEasePunch().setOnComplete(showLevelEndButtons);
+                    } else { showLevelEndButtons(); }
                 });
-            } else {
-                showLevelEndButtons();
-            }
+            } else { showLevelEndButtons(); }
         });
     }
 
@@ -145,6 +148,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void fadeinBlack() { //click event for next level button
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         if(currentLevel >= Config.LEVEL_COUNT) {
             closeLevelEndPanel();
             return;
@@ -175,6 +179,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void restartLevel() {
+        gemCount = 0;
         EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel);
     }
 

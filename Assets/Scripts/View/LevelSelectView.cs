@@ -37,12 +37,14 @@ public class LevelSelectView : MonoBehaviour {
     }
 
     public void BackHome() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
             SceneManager.LoadScene(SceneConst.MENU_SCENE);
         });
     }
 
     private void OnLevelButtonClick(int num){
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
             Config.CURRENT_LEVEL = num;
             SceneManager.LoadScene(SceneConst.LEVELEDITOR_SCENE);

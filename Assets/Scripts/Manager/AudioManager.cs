@@ -82,9 +82,19 @@ public class AudioManager : MonoBehaviour {
         if(disable){
             instance.Mute(SoundConst.BUTTON_CLICK);
             instance.Mute(SoundConst.BUTTON_CLOSE);
+            instance.Mute(SoundConst.FOOTSTEP);
+            instance.Mute(SoundConst.COLLECT_GEM1);
+            instance.Mute(SoundConst.COLLECT_GEM2);
+            instance.Mute(SoundConst.COLLECT_GEM3);
+            instance.Mute(SoundConst.APPLAUSE);
         } else {
             instance.Unmute(SoundConst.BUTTON_CLICK);
             instance.Unmute(SoundConst.BUTTON_CLOSE);
+            instance.Unmute(SoundConst.FOOTSTEP);
+            instance.Unmute(SoundConst.COLLECT_GEM1);
+            instance.Unmute(SoundConst.COLLECT_GEM2);
+            instance.Unmute(SoundConst.COLLECT_GEM3);
+            instance.Unmute(SoundConst.APPLAUSE);
         }
     }
 

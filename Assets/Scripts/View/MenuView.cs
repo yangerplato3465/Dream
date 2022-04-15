@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GoogleMobileAds.Api;
 using System;
+using Lean.Localization;
 
 public class MenuView : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class MenuView : MonoBehaviour {
     public RectTransform redAlien;
     public GameObject startButton;
     public GameObject sfxButton;
+    public GameObject musicButton;
     public GameObject shopButton;
     public Image soundToggle;
     public Image musicToggle;
@@ -42,6 +44,8 @@ public class MenuView : MonoBehaviour {
         TitleAnimation();
         CreateAndLoadAd();
         UpdateShop();
+        if(PlayerPrefs.GetInt(PlayerprefConst.MUSIC) == 1) toggleMusic(true, true);
+        if(PlayerPrefs.GetInt(PlayerprefConst.SFX) == 1) toggleSound(true, true);
     }
 
     private void Update() {
@@ -146,10 +150,10 @@ public class MenuView : MonoBehaviour {
         Transform redAd = redButton.transform.GetChild(1);
         Transform orangeAd = orangeButton.transform.GetChild(1);
 
-        greenBtnText.text = alienInUse == PlayerprefConst.GREEN ? "in use" : "use";
-        blueBtnText.text = alienInUse == PlayerprefConst.BLUE ? "in use" : "use";
-        redBtnText.text = alienInUse == PlayerprefConst.RED ? "in use" : "use";
-        orangeBtnText.text = alienInUse == PlayerprefConst.ORANGE ? "in use" : "use";
+        greenBtnText.text = alienInUse == PlayerprefConst.GREEN ? LeanLocalization.GetTranslationText("inuse") : LeanLocalization.GetTranslationText("use");
+        blueBtnText.text = alienInUse == PlayerprefConst.BLUE ? LeanLocalization.GetTranslationText("inuse") : LeanLocalization.GetTranslationText("use");
+        redBtnText.text = alienInUse == PlayerprefConst.RED ? LeanLocalization.GetTranslationText("inuse") : LeanLocalization.GetTranslationText("use");
+        orangeBtnText.text = alienInUse == PlayerprefConst.ORANGE ? LeanLocalization.GetTranslationText("inuse") : LeanLocalization.GetTranslationText("use");
         
         blueAd.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.BLUE_UNLOCKED) != 1);
         redAd.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.RED_UNLOCKED) != 1);
@@ -257,22 +261,32 @@ public class MenuView : MonoBehaviour {
         UpdateShop();
     }
 
-    public void OnToggleSound(Toggle disable) {
-        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
-        AudioManager.ToggleAllSFX(disable.isOn);
-        var tempColor = soundToggle.color;
-        tempColor.a = disable.isOn ? 0f : 1f;
-        soundToggle.color = tempColor;
-        Debug.Log("Sound disable is " + disable.isOn);
+    public void OnToggleSound(Toggle toggle) {
+        toggleSound(toggle.isOn);
     }
 
-    public void OnToggleMusic(Toggle disable) {
+    private void toggleSound(bool disable, bool isManual = false) {
+        if(isManual)  sfxButton.GetComponent<Toggle>().isOn = disable;
         FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
-        AudioManager.ToggleMusic(disable.isOn);
+        AudioManager.ToggleAllSFX(disable);
+        var tempColor = soundToggle.color;
+        tempColor.a = disable ? 0f : 1f;
+        soundToggle.color = tempColor;
+        PlayerPrefs.SetInt(PlayerprefConst.SFX, disable ? 1 : 0); //0 = unmute, 1 = mute
+    }
+
+    public void OnToggleMusic(Toggle toggle) {
+        toggleMusic(toggle.isOn);
+    }
+
+    private void toggleMusic(bool disable, bool isManual = false) {
+        if(isManual)  musicButton.GetComponent<Toggle>().isOn = disable;
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
+        AudioManager.ToggleMusic(disable);
         var tempColor = musicToggle.color;
-        tempColor.a = disable.isOn ? 0f : 1f;
+        tempColor.a = disable ? 0f : 1f;
         musicToggle.color = tempColor;
-        Debug.Log("Music disable is " + disable.isOn);
+        PlayerPrefs.SetInt(PlayerprefConst.MUSIC, disable ? 1 : 0);
     }
 
     public void OnPurchaseSuccess() {

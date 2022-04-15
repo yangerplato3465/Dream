@@ -7,6 +7,10 @@ public class SoundConst {
     public static string BUTTON_CLICK = "buttonclick";
     public static string BUTTON_CLOSE = "buttonclose";
     public static string FOOTSTEP = "footstep";
+    public static string COLLECT_GEM1 = "collectgem1";
+    public static string COLLECT_GEM2 = "collectgem2";
+    public static string COLLECT_GEM3 = "collectgem3";
+    public static string APPLAUSE = "applause";
 
 }
 
@@ -29,4 +33,6 @@ public class PlayerprefConst {
     public static string ORANGE = "orange";
     public static string ADFREE_UNLOCKED = "adfreeunlocked";
     public static string CURRENT_AVAIL_LEVEL = "currentAvailableLevel";
+    public static string MUSIC = "music";
+    public static string SFX = "sfx";
 }
