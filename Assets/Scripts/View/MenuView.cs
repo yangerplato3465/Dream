@@ -91,6 +91,7 @@ public class MenuView : MonoBehaviour {
 
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
         Debug.LogWarning("HandleRewardedAdFailedToLoad" + args.GetHashCode());
+        
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args) {
