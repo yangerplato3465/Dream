@@ -87,6 +87,9 @@ public class AudioManager : MonoBehaviour {
             instance.Mute(SoundConst.COLLECT_GEM2);
             instance.Mute(SoundConst.COLLECT_GEM3);
             instance.Mute(SoundConst.APPLAUSE);
+            instance.Mute(SoundConst.COLLECT_KEY);
+            instance.Mute(SoundConst.HIT_SPIKE);
+
         } else {
             instance.Unmute(SoundConst.BUTTON_CLICK);
             instance.Unmute(SoundConst.BUTTON_CLOSE);
@@ -95,6 +98,8 @@ public class AudioManager : MonoBehaviour {
             instance.Unmute(SoundConst.COLLECT_GEM2);
             instance.Unmute(SoundConst.COLLECT_GEM3);
             instance.Unmute(SoundConst.APPLAUSE);
+            instance.Unmute(SoundConst.COLLECT_KEY);
+            instance.Unmute(SoundConst.HIT_SPIKE);
         }
     }
 

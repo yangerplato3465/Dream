@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EZCameraShake;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
@@ -76,6 +77,9 @@ public class PlayerMirrorMovement : MonoBehaviour {
         {
             case "Spikes":
                 canMove = false;
+                CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, 1f);
+                animator.SetFloat("Speed", 0);
+                FindObjectOfType<AudioManager>().Play(SoundConst.HIT_SPIKE);
                 EventManager.TriggerEvent(SystemEvents.GAME_LOSE);
                 break;
         }

@@ -12,12 +12,14 @@ public class DoubleButton : MonoBehaviour {
     
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.transform.tag == "Player"){ 
+            FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
             EventManager.TriggerEvent(GamesEvents.TRIGGER_BUTTON, linkCode);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.transform.tag == "Player"){
+            FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLOSE);
             EventManager.TriggerEvent(GamesEvents.UNTRIGGER_BUTTON, linkCode);
         }
     }

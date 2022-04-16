@@ -18,6 +18,7 @@ public class Key : MonoBehaviour {
     
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.transform.tag == "Player"){ 
+            FindObjectOfType<AudioManager>().Play(SoundConst.COLLECT_KEY);
             Destroy(gameObject);
             EventManager.TriggerEvent(GamesEvents.LOCK_OPEN, linkCode);
         }

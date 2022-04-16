@@ -23,6 +23,7 @@ public class MenuView : MonoBehaviour {
     public GameObject shopButton;
     public Image soundToggle;
     public Image musicToggle;
+    public Text version;
     private RewardedAd rewardedAd;
     private string rewardType;
     private Boolean giveReward = false;
@@ -41,6 +42,7 @@ public class MenuView : MonoBehaviour {
 
     void Start() {
         LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad();
+        version.text = "ver - " + Application.version;
         TitleAnimation();
         CreateAndLoadAd();
         UpdateShop();
@@ -102,7 +104,7 @@ public class MenuView : MonoBehaviour {
 
     public void HandleRewardedAdClosed(object sender, EventArgs args) {
         Debug.Log("HandleRewardedAdClosed event received");
-        AudioManager.ToggleMusic(false);
+        AudioManager.ToggleMusic(PlayerPrefs.GetInt(PlayerprefConst.MUSIC) == 1);
         CreateAndLoadAd();
     }
 
@@ -299,6 +301,15 @@ public class MenuView : MonoBehaviour {
 
     public void OnPurchaseFailed() {
         Debug.Log("Something went wrong");
+    }
+
+    public void OnAlienClick(GameObject alien) {
+        FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
+        alien.GetComponent<Button>().interactable = false;
+        Vector3 scale = alien.transform.localScale.x == 1 ? Vector3.one * 1.2f : new Vector3(-1, 1, 1) * 1.2f;
+        LeanTween.scale(alien, scale, .8f).setEasePunch().setOnComplete(() => {
+            alien.GetComponent<Button>().interactable = true;
+        });
     }
 
     private void GoToLevelSelectScene() {

@@ -11,6 +11,8 @@ public class SoundConst {
     public static string COLLECT_GEM2 = "collectgem2";
     public static string COLLECT_GEM3 = "collectgem3";
     public static string APPLAUSE = "applause";
+    public static string COLLECT_KEY = "collectkey";
+    public static string HIT_SPIKE = "hitspike";
 
 }
 

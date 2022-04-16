@@ -1,5 +1,4 @@
 public class Config {
-   public static string VERSION = "1.0.0";
    public static int LEVEL_COUNT = 3;
    public static string ADID_ANDROID = "";
    public static string ADID_IOS = "";
