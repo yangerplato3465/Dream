@@ -1,5 +1,5 @@
 public class Config {
-   public static int LEVEL_COUNT = 3;
+   public static int LEVEL_COUNT = 5;
    public static string ADID_ANDROID = "";
    public static string ADID_IOS = "";
    public static string ITCH_URL = "https://chowdog.itch.io/";

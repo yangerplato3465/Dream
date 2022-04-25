@@ -157,6 +157,8 @@ public class GameManager : MonoBehaviour {
             ShowAd();
             return;
         }
+        homeButton.SetActive(false);
+        nextLevelButton.SetActive(false);
         LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
     }
 

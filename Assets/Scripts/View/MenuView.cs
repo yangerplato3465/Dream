@@ -91,7 +91,7 @@ public class MenuView : MonoBehaviour {
 
     public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
         Debug.LogWarning("HandleRewardedAdFailedToLoad" + args.GetHashCode());
-        
+        UpdateShop(true);
     }
 
     public void HandleRewardedAdOpening(object sender, EventArgs args) {
@@ -137,7 +137,7 @@ public class MenuView : MonoBehaviour {
         UpdateShop();
     }
 
-    private void UpdateShop() {
+    private void UpdateShop(bool loadAdFailed = false) {
         if(PlayerPrefs.GetString(PlayerprefConst.ALIEN_IN_USE) == "") {
             PlayerPrefs.SetString(PlayerprefConst.ALIEN_IN_USE, PlayerprefConst.GREEN);
         }
@@ -164,6 +164,18 @@ public class MenuView : MonoBehaviour {
         blueBtnText.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.BLUE_UNLOCKED) == 1);
         redBtnText.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.RED_UNLOCKED) == 1);
         orangeBtnText.gameObject.SetActive(PlayerPrefs.GetInt(PlayerprefConst.ORANGE_UNLOCKED) == 1);
+
+        if(loadAdFailed) {
+            if(PlayerPrefs.GetInt(PlayerprefConst.BLUE_UNLOCKED) == 0) {setAdButtonUnavailable(blueButton);}
+            if(PlayerPrefs.GetInt(PlayerprefConst.RED_UNLOCKED) == 0) {setAdButtonUnavailable(redButton);}
+            if(PlayerPrefs.GetInt(PlayerprefConst.ORANGE_UNLOCKED) == 0) {setAdButtonUnavailable(orangeButton);}
+        }
+    }
+
+    private void setAdButtonUnavailable(Button button) {
+        // Text text = button.transform.GetChild(1).GetComponentInChildren<Text>();
+        // text.text = LeanLocalization.GetTranslationText("notavail");
+        button.interactable = false;
     }
 
     public void ShowAd(string type) {

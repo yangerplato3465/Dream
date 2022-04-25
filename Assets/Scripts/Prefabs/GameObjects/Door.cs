@@ -27,6 +27,7 @@ public class Door : MonoBehaviour {
     }
 
     private void doorOpen() {
+        FindObjectOfType<AudioManager>().Play(SoundConst.COLLECT_KEY);
         Destroy(gameObject);
     }
 

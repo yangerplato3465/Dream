@@ -1,15 +1,8 @@
 {
-    "LevelNum": 4,
+    "LevelNum": 5,
     "camera_size": 5.0,
     "global_light_intensity": 0.6000000238418579,
     "tiles": [
-        "Sand",
-        "Sand",
-        "Sand",
-        "Sand",
-        "Sand",
-        "Sand",
-        "Sand",
         "Sand",
         "Sand",
         "Sand",
@@ -296,20 +289,17 @@
         -4,
         -4,
         -4,
-        -4,
-        -4,
-        -4,
-        -4,
         -3,
         -3,
         -3,
         -3,
         -3,
         -3,
-        -3,
-        -3,
-        -3,
-        -3,
+        -2,
+        -2,
+        -2,
+        -2,
+        -2,
         -2,
         -2,
         -2,
@@ -330,20 +320,13 @@
         1,
         1,
         1,
+        1,
         2,
         2,
         2,
         2,
         2,
         2,
-        2,
-        2,
-        2,
-        2,
-        3,
-        3,
-        3,
-        3,
         3,
         3,
         3,
@@ -355,11 +338,14 @@
         4,
         4,
         4,
+        4,
         5,
         5,
         5,
         5,
         5,
+        5,
+        6,
         6,
         6,
         6,
@@ -505,8 +491,20 @@
         -6,
         -5,
         -4,
+        0,
+        4,
+        5,
+        -6,
+        -5,
+        -4,
+        0,
+        4,
+        5,
+        -6,
+        -5,
+        -4,
         -3,
-        -2,
+        0,
         1,
         2,
         3,
@@ -515,11 +513,6 @@
         -6,
         -5,
         -4,
-        -3,
-        -2,
-        1,
-        2,
-        3,
         4,
         5,
         -6,
@@ -530,51 +523,37 @@
         -6,
         -5,
         -4,
+        0,
         4,
         5,
         -6,
         -5,
         -4,
+        0,
         4,
         5,
         -6,
         -5,
         -4,
+        0,
         4,
         5,
         -6,
         -5,
         -4,
-        -3,
-        -2,
-        -1,
-        2,
-        3,
+        0,
         4,
         5,
         -6,
         -5,
         -4,
-        -3,
-        -2,
-        -1,
-        2,
-        3,
+        0,
         4,
         5,
         -6,
         -5,
         -4,
-        4,
-        5,
-        -6,
-        -5,
-        -4,
-        4,
-        5,
-        -6,
-        -5,
-        -4,
+        0,
         4,
         5,
         -6,
@@ -638,51 +617,91 @@
         4,
         5
     ],
-    "player_pos_x": -5.5,
-    "player_pos_y": 3.0,
+    "player_pos_x": 5.5,
+    "player_pos_y": 2.5,
     "playerMirror_pos_x": 5.5,
-    "playerMirror_pos_y": -2.0,
+    "playerMirror_pos_y": -1.5,
     "playerMirror_is_reverse": false,
     "keys": [
-        "Key",
-        "Key (1)"
+        "Key"
     ],
     "keys_poses_x": [
-        -5.5,
-        1.0
+        -4.5
     ],
     "keys_poses_y": [
-        -2.0990078449249269,
-        2.9000113010406496
+        3.4905762672424318
     ],
     "keys_link_code": [
-        1,
-        2
+        1
     ],
     "locks": [
-        "Lock",
-        "Lock (1)"
+        "Lock"
     ],
     "locks_poses_x": [
-        3.0,
-        -3.0
-    ],
-    "locks_poses_y": [
-        1.0,
         0.0
     ],
-    "locks_link_code": [
-        1,
-        2
+    "locks_poses_y": [
+        0.5
     ],
-    "spikes": [],
-    "spikes_poses_x": [],
-    "spikes_poses_y": [],
-    "spikes_end_poses_x": [],
-    "spikes_end_poses_y": [],
-    "spikes_isMoving": [],
-    "spikes_time": [],
-    "spikes_delay_time": [],
+    "locks_link_code": [
+        1
+    ],
+    "spikes": [
+        "Spike",
+        "Spike (1)",
+        "Spike (2)",
+        "Spike (3)",
+        "Spike (4)"
+    ],
+    "spikes_poses_x": [
+        -6.5,
+        -2.5,
+        -6.5,
+        -6.5,
+        -2.5
+    ],
+    "spikes_poses_y": [
+        0.5,
+        3.5,
+        3.5,
+        -2.5,
+        -2.5
+    ],
+    "spikes_end_poses_x": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+    ],
+    "spikes_end_poses_y": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+    ],
+    "spikes_isMoving": [
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    "spikes_time": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+    ],
+    "spikes_delay_time": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+    ],
     "buttons": [],
     "buttons_poses_x": [],
     "buttons_poses_y": [],
@@ -691,41 +710,27 @@
     "doors_poses_x": [],
     "doors_poses_y": [],
     "doors_link_code": [],
-    "texts": [
-        "FadingText"
-    ],
-    "texts_poses_x": [
-        -0.06481481343507767
-    ],
-    "texts_poses_y": [
-        0.5
-    ],
-    "texts_start_time": [
-        0.5
-    ],
-    "texts_appear_time": [
-        1.0
-    ],
-    "texts_duration_time": [
-        5.0
-    ],
-    "texts_id": [
-        "level4"
-    ],
+    "texts": [],
+    "texts_poses_x": [],
+    "texts_poses_y": [],
+    "texts_start_time": [],
+    "texts_appear_time": [],
+    "texts_duration_time": [],
+    "texts_id": [],
     "gems": [
         "Gem",
         "Gem (1)",
         "Gem (2)"
     ],
     "gems_poses_x": [
-        0.0,
-        5.5,
-        -1.0
+        2.5,
+        -2.5,
+        -6.5
     ],
     "gems_poses_y": [
-        -2.099196195602417,
-        2.9517245292663576,
-        3.0293052196502687
+        -1.4412249326705933,
+        1.9984395503997803,
+        -1.0171157121658326
     ],
     "level_name": [],
     "gem_count": []
