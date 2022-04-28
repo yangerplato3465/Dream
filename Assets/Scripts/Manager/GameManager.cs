@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void setCurrentLevel(object level) {
-        Debug.Log("setCurrentLevel" + (int)level);
         currentLevel = (int)level;
     }
 
@@ -79,12 +78,10 @@ public class GameManager : MonoBehaviour {
         if(currentLevel >= PlayerPrefs.GetInt(PlayerprefConst.CURRENT_AVAIL_LEVEL)){
             PlayerPrefs.SetInt(PlayerprefConst.CURRENT_AVAIL_LEVEL, currentLevel + 1);
         }
-        Debug.Log("Game win");
     }
 
     private void onGameLose(object sender) {
         fadeinRed();
-        Debug.Log("Game lose");
     }
 
     private void onCollectGem(object sender) {
@@ -141,8 +138,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void showLevelEndButtons() {
-        homeButton.SetActive(true);
-        nextLevelButton.SetActive(true);
         LeanTween.scale(homeButton, Vector3.one * 1.2f, .6f).setEasePunch();
         LeanTween.scale(nextLevelButton, Vector3.one * 1.2f, .6f).setEasePunch();
     }
@@ -157,8 +152,6 @@ public class GameManager : MonoBehaviour {
             ShowAd();
             return;
         }
-        homeButton.SetActive(false);
-        nextLevelButton.SetActive(false);
         LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
     }
 

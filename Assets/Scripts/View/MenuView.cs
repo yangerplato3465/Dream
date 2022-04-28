@@ -207,7 +207,6 @@ public class MenuView : MonoBehaviour {
     }
     
     public void OnButtonClicked(string name) {
-        Debug.Log(name);
         switch(name) {
             case "start":
                 GoToLevelSelectScene();

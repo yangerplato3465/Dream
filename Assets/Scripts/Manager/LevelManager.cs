@@ -207,8 +207,12 @@ public class LevelManager : MonoBehaviour
         // string json = File.ReadAllText(Application.persistentDataPath + "/Level" + level + ".json");
         // var jsonTextFile = Resources.Load("Levels/Level" + level + ".json");
         UnityEngine.Object[] maps = Resources.LoadAll("Levels");
-        string jsonTextFile = maps[level - 1].ToString();
-        Debug.Log("jsonTextFile:" + jsonTextFile);
+        
+        // string jsonTextFile = maps[level - 1].ToString();
+        string jsonTextFile = Array.Find(maps, item => item.name == "Level" + level).ToString();
+        foreach (UnityEngine.Object item in maps){
+            Debug.Log("name " + item.name);
+        }
         LevelData data = JsonUtility.FromJson<LevelData>(jsonTextFile.ToString());
 
         //clear the tilemap
