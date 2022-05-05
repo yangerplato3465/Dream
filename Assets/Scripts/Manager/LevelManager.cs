@@ -210,9 +210,10 @@ public class LevelManager : MonoBehaviour
         
         // string jsonTextFile = maps[level - 1].ToString();
         string jsonTextFile = Array.Find(maps, item => item.name == "Level" + level).ToString();
-        foreach (UnityEngine.Object item in maps){
-            Debug.Log("name " + item.name);
-        }
+        // foreach (UnityEngine.Object item in maps){
+        //     Debug.Log("name " + item.name);
+        // }
+        Config.LEVEL_COUNT = maps.Length;
         LevelData data = JsonUtility.FromJson<LevelData>(jsonTextFile.ToString());
 
         //clear the tilemap
