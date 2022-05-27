@@ -7642,31 +7642,31 @@ MonoBehaviour:
   - name: theme1
     clip: {fileID: 8300000, guid: 5e0e2d64ff0af2a4c8fba8b3f5d17007, type: 3}
     loop: 0
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     source: {fileID: 0}
   - name: theme2
     clip: {fileID: 8300000, guid: b95f425f538326b43b6c85e0960d8488, type: 3}
     loop: 0
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     source: {fileID: 0}
   - name: theme3
     clip: {fileID: 8300000, guid: fcb7bd0f27907b848a417c8d5b0fd06f, type: 3}
     loop: 0
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     source: {fileID: 0}
   - name: theme4
     clip: {fileID: 8300000, guid: 980172bf460ebef409c447ed6145d1dc, type: 3}
     loop: 0
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     source: {fileID: 0}
   - name: theme5
     clip: {fileID: 8300000, guid: fdf5c196ba068364693183956d9dfa30, type: 3}
     loop: 0
-    volume: 0.5
+    volume: 0.8
     pitch: 1
     source: {fileID: 0}
   - name: buttonclose
