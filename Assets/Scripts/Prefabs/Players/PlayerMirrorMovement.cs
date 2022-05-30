@@ -13,14 +13,17 @@ public class PlayerMirrorMovement : MonoBehaviour {
     public RuntimeAnimatorController blue;
     public RuntimeAnimatorController red;
     public RuntimeAnimatorController orange;
+    public GameObject emoji;
     private Vector2 moveInput;
     private bool canMove = true; 
 
     private void Awake() {
         SetSkin();
     }
+
     void Start() {
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
+        if (isReverse) showEmoji();
     }
 
     void Update() {
@@ -34,8 +37,14 @@ public class PlayerMirrorMovement : MonoBehaviour {
 
         if(!isReverse) body.velocity = moveInput * moveSpeed;
         else body.velocity = -moveInput * moveSpeed;
-        if(body.velocity.x > 0) transform.localScale = new Vector3(-1, 1, 1);
-        if(body.velocity.x < 0) transform.localScale = new Vector3(1, 1, 1);
+        if(body.velocity.x > 0) {
+            transform.localScale = new Vector3(-1, 1, 1);
+            emoji.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        if(body.velocity.x < 0) {
+            transform.localScale = new Vector3(1, 1, 1);
+            emoji.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
     private void SetSkin() {
@@ -83,6 +92,11 @@ public class PlayerMirrorMovement : MonoBehaviour {
                 EventManager.TriggerEvent(SystemEvents.GAME_LOSE);
                 break;
         }
+    }
+
+    private void showEmoji() {
+        emoji.SetActive(true);
+        LeanTween.alpha(emoji, 1f, .8f);
     }
 
     private void OnDestroy() {
