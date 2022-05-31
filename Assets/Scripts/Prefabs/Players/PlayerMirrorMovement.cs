@@ -28,8 +28,13 @@ public class PlayerMirrorMovement : MonoBehaviour {
 
     void Update() {
         if(!canMove) return;
-        moveInput.x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
-        moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
+        if(Application.isEditor) {
+            moveInput.x = Input.GetAxisRaw("Horizontal");
+            moveInput.y = Input.GetAxisRaw("Vertical");
+        } else {
+            moveInput.x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+            moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
+        }
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y));
 
