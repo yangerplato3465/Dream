@@ -78,6 +78,8 @@ public class PlayerMovement : MonoBehaviour {
         {
             case "Player":
                 EventManager.TriggerEvent(SystemEvents.GAME_WIN);
+                canMove = false;
+                animator.SetFloat("Speed", 0);
                 break;
             
             case "Spikes":

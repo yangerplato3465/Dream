@@ -89,6 +89,11 @@ public class PlayerMirrorMovement : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D other) {
         switch (other.transform.tag)
         {
+            case "Player":
+                canMove = false;
+                animator.SetFloat("Speed", 0);
+                break;
+
             case "Spikes":
                 canMove = false;
                 CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, 1f);
