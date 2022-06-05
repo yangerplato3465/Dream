@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void destroySelf(object sender){
+        Debug.Log("PlayerdestroySelf");
         Destroy(gameObject);
     }
 
@@ -77,6 +78,7 @@ public class PlayerMovement : MonoBehaviour {
         switch (other.transform.tag)
         {
             case "Player":
+                if(!canMove) return;
                 EventManager.TriggerEvent(SystemEvents.GAME_WIN);
                 canMove = false;
                 animator.SetFloat("Speed", 0);

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     private int gemCount = 0;
     private float timeElasped = 0;
     private bool timeToShowAd = false;
+    private bool triggered = false;
 
     //Admobstuff
     private InterstitialAd interstitial;
@@ -81,6 +82,8 @@ public class GameManager : MonoBehaviour {
     }
 
     private void onGameLose(object sender) {
+        if(triggered) return;
+        triggered = true;
         fadeinRed();
     }
 
@@ -169,6 +172,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void fadeoutRed() {
+        triggered = false;
         restartLevel();
         LeanTween.alpha(redFade, 0f, fadeTime).setEase(fadeEaseType);
     }
