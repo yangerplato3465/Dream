@@ -170,7 +170,7 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: start
+    Text: Start
     Object: {fileID: 0}
   - Language: ChineseTraditional
     Text: "\u958B\u59CB"
@@ -366,7 +366,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 56
     m_FontStyle: 0
     m_BestFit: 0
@@ -477,6 +477,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166694216}
   m_CullTransparentMesh: 1
+--- !u!1 &171176454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171176455}
+  - component: {fileID: 171176456}
+  m_Layer: 0
+  m_Name: iap2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &171176455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171176454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 591883662}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &171176456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171176454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: 'Buy me a bento
+
+      (Ad free)'
+    Object: {fileID: 0}
+  - Language: ChineseTraditional
+    Text: "\u8ACB\u6211\u5403\u4FBF\u7576\n(\u7121\u5EE3\u544A)"
+    Object: {fileID: 0}
 --- !u!1 &184241040
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,15 +780,16 @@ RectTransform:
   m_GameObject: {fileID: 207719119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 2, z: 1}
-  m_Children: []
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 491620392}
   m_Father: {fileID: 1973838757}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 3000, y: 0}
-  m_SizeDelta: {x: 1200, y: 1080}
+  m_SizeDelta: {x: 3600, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207719121
 MonoBehaviour:
@@ -811,7 +865,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 200}
+  m_SizeDelta: {x: 465.05, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &232831752
 MonoBehaviour:
@@ -825,8 +879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationName: shop
-  FallbackText: Shop
+  translationName: buySuccess
+  FallbackText: Success
 --- !u!114 &232831753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,7 +902,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
@@ -860,7 +914,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8CFC\u8CB7\u6210\u529F, \u611F\u8B1D\u60A8\u7684\u652F\u6301 :)"
+  m_Text: Purchase successful! Thank you for your support :)
 --- !u!222 &232831754
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1392,7 +1446,7 @@ MonoBehaviour:
     Text: "\u5546\u5E97"
     Object: {fileID: 0}
   - Language: English
-    Text: shop
+    Text: Shop
     Object: {fileID: 0}
 --- !u!1 &359582384
 GameObject:
@@ -2416,7 +2470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &491620392
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2426,14 +2480,14 @@ RectTransform:
   m_GameObject: {fileID: 491620391}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.00008, y: 1.00008, z: 1.00008}
+  m_LocalScale: {x: 1.0000799, y: 1.00008, z: 1.00008}
   m_Children: []
-  m_Father: {fileID: 1973838757}
-  m_RootOrder: 23
+  m_Father: {fileID: 207719120}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -212, y: 177}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 128, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &491620393
@@ -2449,7 +2503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2532,7 +2586,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -2553,6 +2607,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532552481}
   m_CullTransparentMesh: 1
+--- !u!1 &545739119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 545739120}
+  - component: {fileID: 545739121}
+  m_Layer: 0
+  m_Name: buySuccess
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &545739120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545739119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 591883662}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &545739121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545739119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Purchase successful! Thank you for your support :)
+    Object: {fileID: 0}
+  - Language: ChineseTraditional
+    Text: "\u8CFC\u8CB7\u6210\u529F, \u611F\u8B1D\u60A8\u7684\u652F\u6301 :)"
+    Object: {fileID: 0}
 --- !u!1 &591883660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,6 +2712,9 @@ Transform:
   - {fileID: 1852071825}
   - {fileID: 1804256468}
   - {fileID: 870137948}
+  - {fileID: 951624855}
+  - {fileID: 171176455}
+  - {fileID: 545739120}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2974,6 +3082,7 @@ GameObject:
   - component: {fileID: 705564611}
   - component: {fileID: 705564613}
   - component: {fileID: 705564612}
+  - component: {fileID: 705564614}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3021,7 +3130,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -3033,9 +3142,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'buy me a coffee
-
-    (Ad free)'
+  m_Text: "\u8ACB\u6211\u4E00\u676F\u5496\u5561\n(\u7121\u5EE3\u544A)"
 --- !u!222 &705564613
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3044,6 +3151,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705564610}
   m_CullTransparentMesh: 1
+--- !u!114 &705564614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705564610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: iap1
+  FallbackText: 'Buy me a coffee
+
+    (Ad free)'
 --- !u!1 &708358011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3179,7 +3302,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 56
     m_FontStyle: 0
     m_BestFit: 0
@@ -3653,7 +3776,7 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: not available
+    Text: Not available
     Object: {fileID: 0}
   - Language: ChineseTraditional
     Text: "\u7121\u6CD5\u4F7F\u7528"
@@ -3748,6 +3871,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924191119}
   m_CullTransparentMesh: 1
+--- !u!1 &951624854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 951624855}
+  - component: {fileID: 951624856}
+  m_Layer: 0
+  m_Name: iap1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &951624855
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951624854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 591883662}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951624856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951624854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: 'Buy me a coffee
+
+      (Ad free)'
+    Object: {fileID: 0}
+  - Language: ChineseTraditional
+    Text: "\u8ACB\u6211\u4E00\u676F\u5496\u5561\n(\u7121\u5EE3\u544A)"
+    Object: {fileID: 0}
 --- !u!1 &961810935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4197,7 +4373,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -4411,7 +4587,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 56
     m_FontStyle: 0
     m_BestFit: 0
@@ -4586,7 +4762,7 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: use
+    Text: Use
     Object: {fileID: 0}
   - Language: ChineseTraditional
     Text: "\u4F7F\u7528"
@@ -4649,7 +4825,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -4661,7 +4837,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ver - 0.0.1
+  m_Text: Ver - 0.0.1
 --- !u!222 &1175355861
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4987,7 +5163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269971292
@@ -5150,7 +5326,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 56
     m_FontStyle: 0
     m_BestFit: 0
@@ -5289,7 +5465,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 56
     m_FontStyle: 0
     m_BestFit: 0
@@ -6484,6 +6660,7 @@ MonoBehaviour:
   soundToggle: {fileID: 2048117377}
   musicToggle: {fileID: 1945965206}
   version: {fileID: 1175355860}
+  loading: {fileID: 491620391}
   greenButton: {fileID: 1526465604}
   blueButton: {fileID: 1056791966}
   redButton: {fileID: 359582386}
@@ -6905,6 +7082,7 @@ GameObject:
   - component: {fileID: 1799529022}
   - component: {fileID: 1799529024}
   - component: {fileID: 1799529023}
+  - component: {fileID: 1799529025}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6952,7 +7130,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -6964,9 +7142,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'buy me a bento
-
-    (Ad free)'
+  m_Text: "\u8ACB\u6211\u5403\u4FBF\u7576\n(\u7121\u5EE3\u544A)"
 --- !u!222 &1799529024
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6975,6 +7151,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799529021}
   m_CullTransparentMesh: 1
+--- !u!114 &1799529025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799529021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: iap2
+  FallbackText: 'Buy me a bento
+
+    (Ad free)'
 --- !u!1 &1804256467
 GameObject:
   m_ObjectHideFlags: 0
@@ -7021,7 +7213,7 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: free
+    Text: Free
     Object: {fileID: 0}
   - Language: ChineseTraditional
     Text: "\u5EE3\u544A"
@@ -7072,7 +7264,7 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: in use
+    Text: In use
     Object: {fileID: 0}
   - Language: ChineseTraditional
     Text: "\u4F7F\u7528\u4E2D"
@@ -7248,7 +7440,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 56
     m_FontStyle: 0
     m_BestFit: 0
@@ -7563,7 +7755,6 @@ RectTransform:
   - {fileID: 442254413}
   - {fileID: 207719120}
   - {fileID: 1175355859}
-  - {fileID: 491620392}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7872,7 +8063,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
@@ -7969,7 +8160,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a0dcb40953c5549cd8c99257bc7b04ba, type: 3}
+    m_Font: {fileID: 12800000, guid: 0736921b38faa449cb59ce1b0925c9a2, type: 3}
     m_FontSize: 56
     m_FontStyle: 0
     m_BestFit: 0

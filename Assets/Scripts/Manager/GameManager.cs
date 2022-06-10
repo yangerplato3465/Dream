@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void closeLevelEndPanel() {
+        triggered = false;
         LeanTween.scale(levelEndPanel.gameObject, Vector3.one * .6f, .3f).setEaseInBack().setOnComplete(() => {
             levelEndPanel.gameObject.SetActive(false);
             LeanTween.scale(levelEndPanel.gameObject, Vector3.one * 1f, 0);
@@ -146,6 +147,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void fadeinBlack() { //click event for next level button
+        if(triggered) return;
+        triggered = true;
         FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         if(currentLevel >= Config.LEVEL_COUNT) {
             closeLevelEndPanel();
@@ -159,6 +162,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void fadeoutBlack() {
+        triggered = false;
         loadNextLevel();
         LeanTween.alpha(fade, 0f, fadeTime).setEase(fadeEaseType);
     }
@@ -183,8 +187,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void loadNextLevel() {
-        Debug.Log("currentLevel" + currentLevel);
-
         EventManager.TriggerEvent(SystemEvents.LOAD_LEVEL, currentLevel + 1);
         Debug.Log("load level" + (currentLevel + 1));
         levelEndPanel.gameObject.SetActive(false);

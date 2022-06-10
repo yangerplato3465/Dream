@@ -24,6 +24,7 @@ public class MenuView : MonoBehaviour {
     public Image soundToggle;
     public Image musicToggle;
     public Text version;
+    public GameObject loading;
     private RewardedAd rewardedAd;
     private string rewardType;
     private Boolean giveReward = false;
@@ -37,12 +38,13 @@ public class MenuView : MonoBehaviour {
     public GameObject iapButton2;
 
     private void Awake() {
+        loadingSpin();
         LeanTween.moveX(circleSwipe, 0f, 0f);
     }
 
     void Start() {
         LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad();
-        version.text = "ver - " + Application.version;
+        version.text = "Ver - " + Application.version;
         TitleAnimation();
         CreateAndLoadAd();
         UpdateShop();
@@ -313,6 +315,12 @@ public class MenuView : MonoBehaviour {
 
     public void OnPurchaseFailed() {
         Debug.Log("Something went wrong");
+    }
+
+    public void loadingSpin() {
+        LeanTween.rotateZ(loading, 180f, 1f).setEaseOutElastic().setDelay(.5f).setOnComplete(() => {
+            LeanTween.rotateZ(loading, 360f, 1f).setEaseOutElastic().setDelay(.5f).setOnComplete(loadingSpin);
+        });
     }
 
     public void OnAlienClick(GameObject alien) {
