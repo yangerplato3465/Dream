@@ -16,25 +16,34 @@ public class PlayerMirrorMovement : MonoBehaviour {
     public GameObject emoji;
     private Vector2 moveInput;
     private bool canMove = true; 
+    private Joystick joystick;
+
 
     private void Awake() {
         SetSkin();
     }
 
     void Start() {
+        joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
         EventManager.AddListener(SystemEvents.DESTROY_FOR_LOADING, destroySelf);
         if (isReverse) showEmoji();
     }
 
     void Update() {
         if(!canMove) return;
-        if(Application.isEditor) {
-            moveInput.x = Input.GetAxisRaw("Horizontal");
-            moveInput.y = Input.GetAxisRaw("Vertical");
-        } else {
-            moveInput.x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
-            moveInput.y = CrossPlatformInputManager.GetAxisRaw("Vertical");
+        int horizontal = 0;
+        int vertical = 0;
+        if(Mathf.Abs(joystick.Horizontal) > Mathf.Abs(joystick.Vertical)){
+            vertical = 0;
+            if(joystick.Horizontal > 0)horizontal = 1;
+            else horizontal = -1;
+        } else if(Mathf.Abs(joystick.Horizontal) < Mathf.Abs(joystick.Vertical)) {
+            horizontal = 0;
+            if(joystick.Vertical > 0)vertical = 1;
+            else vertical = -1;
         }
+        moveInput.x = horizontal;
+        moveInput.y = vertical;
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y));
 
