@@ -43,9 +43,8 @@ public class MenuView : MonoBehaviour {
     }
 
     void Start() {
-        LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad();
+        LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad().setDelay(1.5f).setOnComplete(TitleAnimation);
         version.text = "Ver - " + Application.version;
-        TitleAnimation();
         CreateAndLoadAd();
         UpdateShop();
         if(PlayerPrefs.GetInt(PlayerprefConst.MUSIC) == 1) toggleMusic(true, true);
@@ -318,8 +317,8 @@ public class MenuView : MonoBehaviour {
     }
 
     public void loadingSpin() {
-        LeanTween.rotateZ(loading, 180f, 1f).setEaseOutElastic().setDelay(.5f).setOnComplete(() => {
-            LeanTween.rotateZ(loading, 360f, 1f).setEaseOutElastic().setDelay(.5f).setOnComplete(loadingSpin);
+        LeanTween.rotateZ(loading, 180f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(() => {
+            LeanTween.rotateZ(loading, 360f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(loadingSpin);
         });
     }
 

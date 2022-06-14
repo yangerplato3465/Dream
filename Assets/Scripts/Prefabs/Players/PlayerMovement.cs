@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 using EZCameraShake;
 
 public class PlayerMovement : MonoBehaviour {

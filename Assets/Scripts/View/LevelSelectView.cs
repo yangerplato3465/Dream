@@ -10,6 +10,7 @@ public class LevelSelectView : MonoBehaviour {
     public Transform buttonLayout;
     public GameObject button;
     public GameObject circleSwipe;
+    public GameObject loading;
 
     private string[] levelName;
 
@@ -33,7 +34,8 @@ public class LevelSelectView : MonoBehaviour {
     }
 
     private void Start() {
-        LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad();
+        loadingSpin();
+        LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad().setDelay(1.5f);
     }
 
     public void BackHome() {
@@ -48,6 +50,12 @@ public class LevelSelectView : MonoBehaviour {
         LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
             Config.CURRENT_LEVEL = num;
             SceneManager.LoadScene(SceneConst.LEVELEDITOR_SCENE);
+        });
+    }
+
+    public void loadingSpin() {
+        LeanTween.rotateZ(loading, 180f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(() => {
+            LeanTween.rotateZ(loading, 360f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(loadingSpin);
         });
     }
 }

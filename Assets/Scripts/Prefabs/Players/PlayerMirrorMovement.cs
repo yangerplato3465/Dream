@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using EZCameraShake;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMirrorMovement : MonoBehaviour {
     public float moveSpeed;

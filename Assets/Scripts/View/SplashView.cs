@@ -10,9 +10,11 @@ public class SplashView : MonoBehaviour {
     public RectTransform earphone;
     public RectTransform earphoneText;
     public GameObject circleSwipe;
+    public GameObject loading;
 
     void Start() {
         logoFadeIn();
+        loadingSpin();
     }
 
     private void logoFadeIn() {
@@ -33,6 +35,12 @@ public class SplashView : MonoBehaviour {
     private void GoToMenu() {
         LeanTween.moveX(circleSwipe, 0f, 1f).setEaseOutQuad().setOnComplete(() => {
             SceneManager.LoadScene(SceneConst.MENU_SCENE);
+        });
+    }
+
+    public void loadingSpin() {
+        LeanTween.rotateZ(loading, 180f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(() => {
+            LeanTween.rotateZ(loading, 360f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(loadingSpin);
         });
     }
 }

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public float fadeTime = 1f;
     public LeanTweenType fadeEaseType = LeanTweenType.easeInOutQuart;
     public GameObject restartButton;
+    public GameObject loading;
     private int gemCount = 0;
     private float timeElasped = 0;
     private bool timeToShowAd = false;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour {
         AddListener();
     }
     void Start() {
+        loadingSpin();
         LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad();
         isAdFree = PlayerPrefs.GetInt(PlayerprefConst.ADFREE_UNLOCKED) == 1;
         if(isAdFree) return;
@@ -258,6 +260,12 @@ public class GameManager : MonoBehaviour {
             //continue gameplay if failed to load ad
             LeanTween.alpha(fade, 1f, fadeTime).setEase(fadeEaseType).setOnComplete(fadeoutBlack);
         }
+    }
+
+    public void loadingSpin() {
+        LeanTween.rotateZ(loading, 180f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(() => {
+            LeanTween.rotateZ(loading, 360f, 1f).setEaseOutElastic().setDelay(.3f).setOnComplete(loadingSpin);
+        });
     }
 
     private void AddListener() {
