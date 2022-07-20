@@ -43,7 +43,7 @@ public class MenuView : MonoBehaviour {
     }
 
     void Start() {
-        LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad().setDelay(.5f).setOnComplete(TitleAnimation);
+        LeanTween.moveLocalX(circleSwipe, -4000f, 1f).setEaseOutQuad().setDelay(.5f).setOnComplete(TitleAnimation);
         version.text = "Ver - " + Application.version;
         CreateAndLoadAd();
         UpdateShop();

@@ -146,9 +146,11 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(baseRect, screenPosition, cam, out localPoint))
         {
             Vector2 pivotOffset = baseRect.pivot * baseRect.sizeDelta;
+            Debug.Log("localPoint.x" + localPoint.x);
+            float offset = 135;
             if(localPoint.x > 10000) {
-                localPoint.x /= 135;
-                localPoint.y /= 135;
+                localPoint.x /= offset;
+                localPoint.y /= offset;
             }
             return localPoint - (background.anchorMax * baseRect.sizeDelta) + pivotOffset;
         }

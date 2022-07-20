@@ -35,7 +35,7 @@ public class LevelSelectView : MonoBehaviour {
 
     private void Start() {
         loadingSpin();
-        LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad().setDelay(1.5f);
+        LeanTween.moveLocalX(circleSwipe, -4000f, 1f).setEaseOutQuad().setDelay(1.5f);
     }
 
     public void BackHome() {

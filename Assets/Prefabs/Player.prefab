@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c4aef7934c0644da37c5659e4d0217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 4
   animator: {fileID: 6600901385818356934}
   body: {fileID: 6600901385818356931}
   green: {fileID: 9100000, guid: 5067faf864d9c184e8b02fb3a3e51608, type: 2}

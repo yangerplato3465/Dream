@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
     }
     void Start() {
         loadingSpin();
-        LeanTween.moveLocalX(circleSwipe, 3000f, 1f).setEaseOutQuad();
+        LeanTween.moveLocalX(circleSwipe, -4000f, 1f).setEaseOutQuad();
         isAdFree = PlayerPrefs.GetInt(PlayerprefConst.ADFREE_UNLOCKED) == 1;
         if(isAdFree) return;
         MobileAds.Initialize(initStatus => { 
@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void onRestartButtonClick() {
+        if(triggered) return;
+        triggered = true;
         FindObjectOfType<AudioManager>().Play(SoundConst.BUTTON_CLICK);
         fadeinRed();
         LeanTween.scale(restartButton, Vector3.one * 1.2f, 1).setEasePunch();
@@ -178,6 +180,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void fadeoutRed() {
+        levelEndPanel.gameObject.SetActive(false);
         triggered = false;
         restartLevel();
         LeanTween.alpha(redFade, 0f, fadeTime).setEase(fadeEaseType);
