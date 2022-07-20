@@ -43,7 +43,7 @@ public class MenuView : MonoBehaviour {
     }
 
     void Start() {
-        LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad().setDelay(1.5f).setOnComplete(TitleAnimation);
+        LeanTween.moveLocalX(circleSwipe, -3000f, 1f).setEaseOutQuad().setDelay(.5f).setOnComplete(TitleAnimation);
         version.text = "Ver - " + Application.version;
         CreateAndLoadAd();
         UpdateShop();
@@ -60,7 +60,7 @@ public class MenuView : MonoBehaviour {
 
     private void CreateAndLoadAd() {
         // #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        string adUnitId = Config.ADID_ANDROID_REWARDED;
         // #elif UNITY_IPHONE
         //     string adUnitId = "ca-app-pub-3940256099942544/1712485313";
         // #else
@@ -214,12 +214,6 @@ public class MenuView : MonoBehaviour {
                 break;
             case "shop":
                 OpenShopPanel();
-                break;
-            case "twitter":
-                Application.OpenURL(Config.TWITTER_URL);
-                break;
-            case "itch":
-                Application.OpenURL(Config.ITCH_URL);
                 break;
             case "close":
                 CloseShopPanel();

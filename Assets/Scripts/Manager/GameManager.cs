@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour {
 
     private void RequestInterstitial() {
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+            string adUnitId = Config.ADID_ANDROID_INTERSTITIAL;
         #elif UNITY_IPHONE
             string adUnitId = "ca-app-pub-3940256099942544/4411468910";
         #else
